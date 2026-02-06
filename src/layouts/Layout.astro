@@ -1,0 +1,43 @@
+---
+import '@/styles/global.css'
+
+const version = '0.1.0'; // get version from package.json
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tenfe</title>
+
+	<!-- Leaflet CSS and JS -->
+	<link rel="stylesheet" href="/css/leaflet/leaflet.css" crossorigin="" />
+	<link rel="stylesheet" href="/css/leaflet/markercluster.css" />
+	<script is:inline src="/js/leaflet/leaflet.js" crossorigin=""></script>
+	<script is:inline src="/js/leaflet/markercluster.js"></script>
+
+  </head>
+
+  <body class="flex justify-center bg-gray-100">
+    <main class=" flex flex-col w-full h-screen p-2 lg:p-10">
+      <slot />
+
+	  <!-- Version -->
+	  <div class="text-xs text-gray-500 mt-4 text-end">
+		Tenfe - v{version}
+	  </div>
+    </main>
+
+	<script src="/js/main.js" defer></script>
+  </body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

@@ -1,0 +1,17 @@
+{
+  "name": "tenfe",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "9.0.4",
+    "@tailwindcss/vite": "4.1.18",
+    "astro": "5.17.1",
+    "tailwindcss": "4.1.18"
+  }
+}
