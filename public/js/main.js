@@ -32,9 +32,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     setInterval(initPaintress, REFRESH_TIME * 1000)
 })
 
+// Fetch realtime train data and update map
 async function initPaintress() {
     // Clear error message
     setErrorMessage('', true)
+
+    // Get incidents data
+    const incidents = await getIncidents()
     
     // Set time left
     const refreshTimeEl = document.getElementById('refreshTime')
@@ -71,12 +75,22 @@ async function initPaintress() {
                     ]
                 }
 
+                // Has incidents?
+                let hasIncident = ""
+                if (incidents.length > 0) {
+                    incidents.forEach(incident => {
+                        if (incident.routes && incident.routes.some(route => entity.vehicle.routeId && entity.vehicle.routeId.includes(route))) {
+                            hasIncident += `${incident.description}`
+                        }
+                    })
+                }
+
                 // Create marker
                 const marker = L.marker([
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
                 ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, focusOn) })
-                .bindPopup(formatPopup(entity), { width: "550px" })
+                .bindPopup(formatPopup(entity, hasIncident), { width: "550px" })
 
                 // On popup open
                 marker.on('popupopen', () => {
@@ -105,6 +119,18 @@ async function initPaintress() {
     } catch (error) {
         console.error('Error loading train data:', error)
         setErrorMessage()
+    }
+}
+
+// Fetch incidents data
+async function getIncidents() {
+    try {
+        const data = await fetch('/api/incidents.json').then(res => res.json())
+        return data || []
+
+    }catch (error) {
+        console.error('Error loading incidents data:', error)
+        return []
     }
 }
 
@@ -226,7 +252,7 @@ function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a int
 }
 
 // Format popup content
-function formatPopup(data) {
+function formatPopup(data, hasIncident) {
     const status = data.vehicle.currentStatus
     let stopsList = `<ol class="relative mt-2 py-2">
         <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-300"></div>`
