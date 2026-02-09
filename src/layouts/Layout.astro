@@ -1,15 +1,28 @@
 ---
 import '@/styles/global.css'
 
-const version = '0.1.1'; // get version from package.json
+const version = '0.1.1.1'; // get version from package.json
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ca">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tenfe</title>
+    <title>tenfe - map</title>
+
+	<!-- Logos -->
+	<link rel="apple-touch-icon" href="images/logos/tenfe_small.png">
+	<link rel="icon" type="image/png" href="images/logos/tenfe_small.png" />
+	<link rel="icon" type="image/png" sizes="192x192" href="images/logos/tenfe_192.png">
+
+	<!-- Share metas -->
+	<meta property="og:title" content="tenfe - map" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Tenfe" />
+	<meta property="og:description" content="Mapa en temps real, relativament, d'R1." />
+	<meta property="og:url" content="https://tenfe.vercel.app" />
+	<meta property="og:image" content="https://tenfe.vercel.app/images/logos/tenfe_192.png" />
 
 	<!-- Leaflet CSS and JS -->
 	<link rel="stylesheet" href="/css/leaflet/leaflet.css" crossorigin="" />
