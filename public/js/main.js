@@ -300,5 +300,15 @@ function formatPopup(data, hasIncident) {
             <div id="stops-${data.id}" class="max-h-40 overflow-y-auto">
                 ${stopsList}
             </div>
+
+            ${hasIncident ? `
+                 <div class="container-incidents flex flex-row items-start space-x-3 mt-5 p-3 bg-red-100 border border-red-400 rounded-md">
+                    <div class="flex-none w-10 h-10 flex items-center justify-center rounded-full bg-red-200">
+                        <img src="icons/alert.svg" class="w-5 h-5 inline-block" />
+                    </div>
+                    <span class="text-sm text-red-700 ">${hasIncident}</span>
+                </div>
+                `
+            : ''}
     `
 }
