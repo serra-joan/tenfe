@@ -50,4 +50,7 @@ Per poder treballar amb un arxiu més lleuger, millor fer servir el `/src/script
 ### Següent parada
 Per poder saber la següent parada podem saber-ho a través dels `Stop Times`. Podem mirar el index de l'actual parada i mirar quina serà la següent.
 
+### Incidències
+Api necessaria: [https://gtfsrt.renfe.com/alerts.json](https://gtfsrt.renfe.com/alerts.json)
 
+Necessitem obtenir el `routeId` en la llista de `alert.informedEntity` per poder saber si la nostra ruta està inclosa en l'incidència. Si esta en aquesta llista podem dir que el tren té el problema que posa en `alert.descriptionText.translation`.
