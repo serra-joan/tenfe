@@ -1,5 +1,6 @@
 export const prerender = false;
 
+import { getTripUpdates } from '@/scripts/get-trip-updates'
 import stationsJSON from '@public/estacions_cercanias.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
@@ -21,6 +22,8 @@ export async function GET () {
 
         // Only R1 and RG1
         if (data.entity && data.entity.length > 0) {
+            const tripUpdates = await getTripUpdates()
+
             // Filter and set data
             trainsFiltered = data.entity.filter((e: TrainElement) => {
                 if (e.id.includes('R1-') || e.id.includes('RG1-')) {
@@ -82,6 +85,10 @@ export async function GET () {
                             e.vehicle.start_station = firstStation || 'Unknown'
                             e.vehicle.end_station = lastStation || 'Unknown'
                         }
+
+                        // Add delay info from trip updates
+                        const tripUpdate = tripUpdates.find(update => update.trip_id === e.vehicle.trip.tripId)
+                        e.vehicle.delay = tripUpdate ? tripUpdate.delay : 0
 
                     }else {
                         // console.warn(`Warning: Trip not found for trip_id: ${e.vehicle.trip.tripId} on train ID: ${e.id}`)

@@ -85,11 +85,14 @@ async function initPaintress() {
                     })
                 }
 
+                // Has delay?
+                let hasDelay = (entity.vehicle.delay && entity.vehicle.delay > 0)
+
                 // Create marker
                 const marker = L.marker([
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
-                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, focusOn) })
+                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, hasDelay, focusOn) })
                 .bindPopup(formatPopup(entity, hasIncident), { width: "550px" })
 
                 // On popup open
@@ -169,7 +172,7 @@ function getUrlParameter() {
 }
 
 // Build custom icon for train marker
-function iconBuilder(id, status, hasIncident, focusOn = false) {
+function iconBuilder(id, status, hasIncident, hasDelay, focusOn = false) {
     let image = imageDefault
     let extraClass = ''
    
@@ -179,7 +182,6 @@ function iconBuilder(id, status, hasIncident, focusOn = false) {
 
     // Status image
     if (status === 'INCOMING_AT') extraClass = 'animate-moving-left'
-    if (focusOn) extraClass += ' ring-4 ring-orange-500'
 
     return L.divIcon({
             className: '', // Deja vacío para usar solo Tailwind
@@ -187,9 +189,14 @@ function iconBuilder(id, status, hasIncident, focusOn = false) {
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
             html: `
-                <div class="relative p-1.5 w-8 h-8 ${extraClass}">
-                    <img src="${image}" class="w-8 h-8 rounded-md shadow" />
-                    ${hasIncident ? `<img src="icons/alert.svg" class="absolute top-0 left-0 w-4 h-4 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                <div class="relative p-1.5 w-10 h-10 ${extraClass}">
+                    <img src="${image}" class="w-10 h-10 rounded-md shadow ${focusOn ? 'ring-4 ring-orange-500' : ''}" />
+                    ${hasDelay || hasIncident ? 
+                        `<div class="absolute flex space-x-0.5 -top-1 -left-1">
+                            ${hasIncident ? `<img src="icons/alert.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                            ${hasDelay ? `<img src="icons/clock.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                        </div>` 
+                    : ''}
                 </div>
             `
         })
@@ -237,6 +244,19 @@ function formatDate(timestamp) {
     return `${p.hour}:${p.minute}:${p.second}`
 }
 
+function sumDelayToTime(time, delay) {
+    const [hours, minutes] = time.split(':').map(Number)
+    const date = new Date()
+
+    date.setHours(hours)
+    date.setMinutes(minutes + Math.round(delay / 60))
+
+    const delayedHours = String(date.getHours()).padStart(2, '0')
+    const delayedMinutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${delayedHours}:${delayedMinutes}`
+}
+
 // Errors message
 function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a intentar més tard.", clear = false) {
     const errorMessage = document.getElementById('txtErrorMessage')
@@ -256,14 +276,25 @@ function formatPopup(data, hasIncident) {
         <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-300"></div>`
 
     if(data.stops) {
-        data.stops.forEach((stop, idx) => {
+        const delay = data.vehicle.delay // seconds
+
+        data.stops.forEach(stop => {
             const isCurrent = stop.id == data.vehicle.stopId
-            const index = idx + 1
+            let delayArrivalTime = null
+
+            if (delay && delay > 0) {
+                const delayMinutes = Math.round(delay / 60)
+                // Sum delay to original arrival time
+                delayArrivalTime = sumDelayToTime(stop.arrival_time, delay)
+            }
 
             // `id="current-stop-${data.id}"` is used to scroll into view when popup opens
             stopsList += `
                 <li ${isCurrent ? `id="current-stop-${data.id}"` : ''} class="flex items-start px-2 py-4 ${isCurrent ? 'font-bold bg-yellow-100 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
-                    <div class="w-6 text-right select-none">${stop.arrival_time}</div>
+                    <div class=" flex-col w-6 text-right select-none">
+                        <span class="${delayArrivalTime ? 'line-through' : ''}">${stop.arrival_time}</span>
+                        ${delayArrivalTime ? `<span class="text-red-600">${delayArrivalTime}</span>` : ''}
+                    </div>
                     <div class="relative w-4.5 ms-4 flex items-start justify-center">
                         <div class="w-3 h-3 bg-black rounded-full border border-gray-700 z-10 mt-1 ${status === 'INCOMING_AT' && isCurrent ? 'animate-moving-down' : ''}"></div>
                     </div>
