@@ -147,9 +147,6 @@ document.addEventListener('click', (e) => {
         const url = new URL(window.location.href)
         url.searchParams.set('trainId', trainId)
 
-        console.log('Copying to clipboard:', url.toString())
-        console.log('Target element:', target)
-
         // Copy to clipboard
         navigator.clipboard.writeText(url.toString()).then(() => {
             const msg = target.nextElementSibling
