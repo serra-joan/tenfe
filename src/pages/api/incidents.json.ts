@@ -27,6 +27,7 @@ export async function GET () {
 
                     // Get routes
                     incident.routes = informedEntity.map(routeId => routeId.routeId)
+                                                    .filter((r): r is string => r !== undefined)
                                         
                     // Get desciption
                     const descriptionText = e.alert.descriptionText.translation || []
@@ -52,7 +53,10 @@ export async function GET () {
         return new Response(
             JSON.stringify(incidetnsFiltered), 
             {
-                headers: BASE_HEADERS
+                headers: {
+                    ...BASE_HEADERS,
+                    'Cache-Control': 's-maxage=3600, stale-while-revalidate=3600'
+                }
             }
         )
     
