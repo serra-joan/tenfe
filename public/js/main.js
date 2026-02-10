@@ -89,7 +89,7 @@ async function initPaintress() {
                 const marker = L.marker([
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
-                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, focusOn) })
+                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, focusOn) })
                 .bindPopup(formatPopup(entity, hasIncident), { width: "550px" })
 
                 // On popup open
@@ -169,10 +169,8 @@ function getUrlParameter() {
 }
 
 // Build custom icon for train marker
-function iconBuilder(id, status, focusOn = false) {
+function iconBuilder(id, status, hasIncident, focusOn = false) {
     let image = imageDefault
-    let showStatus = false
-    let imageStatus = ''
     let extraClass = ''
    
     // Image
@@ -189,9 +187,9 @@ function iconBuilder(id, status, focusOn = false) {
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
             html: `
-                <div class="relative w-8 h-8">
-                    <img src="${image}" class="w-8 h-8 rounded-md shadow ${extraClass}" />
-                    ${showStatus ? `<img src="${imageStatus}" class="absolute top-0 right-0 w-4 h-4 rounded-full border-2 border-white shadow" />` : ''}
+                <div class="relative p-1.5 w-8 h-8 ${extraClass}">
+                    <img src="${image}" class="w-8 h-8 rounded-md shadow" />
+                    ${hasIncident ? `<img src="icons/alert.svg" class="absolute top-0 left-0 w-4 h-4 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
                 </div>
             `
         })
