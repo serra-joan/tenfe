@@ -64,9 +64,14 @@ async function initPaintress() {
 
         if (data && data.length > 0) {
             data.forEach(entity => {
-                let focusOn = false
-
+                // Some trains may not have position data, skip those
+                if (!entity.vehicle.position.latitude || !entity.vehicle.position.longitude) {
+                    console.warn(`Train ${entity.id ?? 'unknown'} has no position data, skipping.`)
+                    return
+                }
+                
                 // If it's the train to focus, save its location
+                let focusOn = false
                 if (trainIdToFocus && entity.id === trainIdToFocus) {
                     focusOn = true
                     trainFocusLocation = [
