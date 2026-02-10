@@ -55,7 +55,7 @@ export async function GET () {
             {
                 headers: {
                     ...BASE_HEADERS,
-                    'Cache-Control': 's-maxage=3600, stale-while-revalidate=3600'
+                    'Cache-Control': 's-maxage=600, stale-while-revalidate=600' // 10 mins cache
                 }
             }
         )
