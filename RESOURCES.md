@@ -54,3 +54,8 @@ Per poder saber la següent parada podem saber-ho a través dels `Stop Times`. P
 Api necessaria: [https://gtfsrt.renfe.com/alerts.json](https://gtfsrt.renfe.com/alerts.json)
 
 Necessitem obtenir el `routeId` en la llista de `alert.informedEntity` per poder saber si la nostra ruta està inclosa en l'incidència. Si esta en aquesta llista podem dir que el tren té el problema que posa en `alert.descriptionText.translation`.
+
+### Hores d'arribada en cas de retards
+Api necessaria: [https://gtfsrt.renfe.com/trip_updates.json](https://gtfsrt.renfe.com/trip_updates.json)
+
+Haurem de relacionar el `tripId` de cada `entity` per saber si és de l'R1 i si estem mostrant el tren. Si és així, en `entity.tripUpdate.delay` tenim el temps de retard en segons. Aquest temps el podem aplicar en els `arrival_time` de cada parada per poder saber a quina hora s'espera l'arribada.
