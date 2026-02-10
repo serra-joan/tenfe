@@ -85,11 +85,14 @@ async function initPaintress() {
                     })
                 }
 
+                // Has delay?
+                let hasDelay = (entity.vehicle.delay && entity.vehicle.delay > 0)
+
                 // Create marker
                 const marker = L.marker([
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
-                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, focusOn) })
+                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, hasDelay, focusOn) })
                 .bindPopup(formatPopup(entity, hasIncident), { width: "550px" })
 
                 // On popup open
@@ -169,7 +172,7 @@ function getUrlParameter() {
 }
 
 // Build custom icon for train marker
-function iconBuilder(id, status, hasIncident, focusOn = false) {
+function iconBuilder(id, status, hasIncident, hasDelay, focusOn = false) {
     let image = imageDefault
     let extraClass = ''
    
@@ -179,7 +182,6 @@ function iconBuilder(id, status, hasIncident, focusOn = false) {
 
     // Status image
     if (status === 'INCOMING_AT') extraClass = 'animate-moving-left'
-    if (focusOn) extraClass += ' ring-4 ring-orange-500'
 
     return L.divIcon({
             className: '', // Deja vacío para usar solo Tailwind
@@ -187,9 +189,14 @@ function iconBuilder(id, status, hasIncident, focusOn = false) {
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
             html: `
-                <div class="relative p-1.5 w-8 h-8 ${extraClass}">
-                    <img src="${image}" class="w-8 h-8 rounded-md shadow" />
-                    ${hasIncident ? `<img src="icons/alert.svg" class="absolute top-0 left-0 w-4 h-4 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                <div class="relative p-1.5 w-10 h-10 ${extraClass}">
+                    <img src="${image}" class="w-10 h-10 rounded-md shadow ${focusOn ? 'ring-4 ring-orange-500' : ''}" />
+                    ${hasDelay || hasIncident ? 
+                        `<div class="absolute flex space-x-0.5 -top-1 -left-1">
+                            ${hasIncident ? `<img src="icons/alert.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                            ${hasDelay ? `<img src="icons/clock.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                        </div>` 
+                    : ''}
                 </div>
             `
         })
