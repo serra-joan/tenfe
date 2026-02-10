@@ -32,3 +32,15 @@
 .leaflet-popup-content p {
     margin: 0 !important;
 }
+
+/* Container for the incidents alert. Animate with height */ 
+.container-incidents {
+    height: 80px;
+    overflow: hidden;
+    transition: height .3s;
+    interpolate-size: allow-keywords;
+}
+
+.container-incidents:hover {
+    height: auto;
+}
