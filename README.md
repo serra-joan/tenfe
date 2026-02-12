@@ -12,7 +12,7 @@ El projecta està dins el framework [Astro](https://astro.build/), així doncs, 
 * `src/pages/index.html`: Vista actual principal.
 * `src/pages/api`: Api de l'aplicació que obté i filtra les dades dels trens
 * `public/files`: En `raw/` han de guardar-se els `.txt` amb totes les rutes i viatges de les línies per poder convertir-les a `.json` amb els `src/scripts`. _A RESOURCES.md explico d'on treure els fitxers._
-* `public/estacions_cercanias.json`: Estacions de cercanias de Barcelona.
+* `public/files/output/estacions_cercanias.json`: Estacions de cercanias de Barcelona.
 
 **RESOURCES.md**: Aquí trobaràs d'on trec tota la informació.
 

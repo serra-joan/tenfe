@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import { getTripUpdates } from '@/scripts/get-trip-updates'
-import stationsJSON from '@public/estacions_cercanias.json' with { type: 'json' }
+import stationsJSON from '@public/files/output/estacions_cercanias.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
 
