@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Fetch realtime train data and update map
 async function initPaintress() {
+    // Set loading view
+    setLoading(true)
+
     // Clear error message
     setErrorMessage('', true)
 
@@ -128,6 +131,9 @@ async function initPaintress() {
         console.error('Error loading train data:', error)
         setErrorMessage()
     }
+
+    // Remove loading view
+    setLoading(false)
 }
 
 // Fetch incidents data
@@ -268,6 +274,15 @@ function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a int
 
         if (clear) errorMessage.classList.add('hidden')
         else errorMessage.classList.remove('hidden')
+    }
+}
+
+// Loading view
+function setLoading(isLoading) {
+    const loadingEl = document.getElementById('loading')
+    if (loadingEl) {
+        if (isLoading) loadingEl.classList.remove('hidden')
+        else loadingEl.classList.add('hidden')
     }
 }
 

@@ -4,10 +4,22 @@ import Layout from '@/layouts/Layout.astro';
 
 <Layout>
 	<div class="mb-10">
-          <h1 class="font-bold text-4xl">Tenfe - R1</h1>
-          <h2 class="text-xl">Trens en temps real de la línea R1 (s'actualitza en <span id="refreshTime">30</span>s)</h2>
+        <h1 class="font-bold text-4xl">Tenfe - R1</h1>
+        <h2 class="text-xl">Trens en temps real de la línea R1 (s'actualitza en <span id="refreshTime">30</span>s)</h2>
 
-          <p id="txtErrorMessage" class="hidden text-red-400">Alguna cosa ha anat malament. Torna-ho a intentar més tard.</p>
-      </div>
-      <div id="map" class="map-container flex-1 min-h-0 rounded-xl"></div>
+        <p id="txtErrorMessage" class="hidden text-red-400">Alguna cosa ha anat malament. Torna-ho a intentar més tard.</p>
+    </div>
+
+    <div class="relative w-full flex-1 min-h-0">
+        <div id="map" class="map-container h-full rounded-xl z-0"></div>
+        <div id="loading" class="absolute block top-0 left-0 z-10 w-full h-full">
+            <div class="relative w-full h-full flex items-center justify-center">
+                <div class="relative border-b-3 border-r1 w-1/2 z-20 md:w-1/4 md:border-b-5 rounded-xl">
+                    <img src="/icons/train.svg" alt="Train icon" class="w-10 animate-trainloading absolute left-0 bottom-0" />
+                </div>
+
+                <div class="absolute top-0 left-0 bg-black opacity-70 w-full h-full rounded-xl"></div>
+            </div>
+        </div>
+    </div>
 </Layout>
