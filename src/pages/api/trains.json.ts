@@ -91,9 +91,6 @@ export async function GET () {
                         const tripUpdate = tripUpdates.find(update => update.trip_id === e.vehicle.trip.tripId)
                         e.vehicle.delay = tripUpdate ? tripUpdate.delay : 0
 
-                        // Remove - test line
-                        if(e.id === 'VP_R1-25664') console.log(`Train ${e.id} - status ${e.vehicle.currentStatus}`);
-
                     }else {
                         // console.warn(`Warning: Trip not found for trip_id: ${e.vehicle.trip.tripId} on train ID: ${e.id}`)
                     }
