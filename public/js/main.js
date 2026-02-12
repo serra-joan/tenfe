@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initPaintress() 
 
     // Set refresh timer
-    setInterval(initPaintress, REFRESH_TIME * 1000)
+    // setInterval(initPaintress, REFRESH_TIME * 1000)
 })
 
 // Fetch realtime train data and update map
@@ -81,11 +81,11 @@ async function initPaintress() {
                 }
 
                 // Has incidents?
-                let hasIncident = ""
+                let incidentsList = []
                 if (incidents.length > 0) {
                     incidents.forEach(incident => {
-                        if (incident.routes && incident.routes.some(route => entity.vehicle.routeId && entity.vehicle.routeId.includes(route))) {
-                            hasIncident += `${incident.description}`
+                        if (incident.routes && incident.routes.some(route => entity.vehicle.trip.route_id && entity.vehicle.trip.route_id.includes(route))) {
+                            incidentsList.push(`${incident.description}`)
                         }
                     })
                 }
@@ -97,8 +97,8 @@ async function initPaintress() {
                 const marker = L.marker([
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
-                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, hasIncident, hasDelay, focusOn) })
-                .bindPopup(formatPopup(entity, hasIncident), { width: "550px" })
+                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, (incidentsList.length > 0), hasDelay, focusOn) })
+                .bindPopup(formatPopup(entity, incidentsList), { width: "550px" })
 
                 // On popup open
                 marker.on('popupopen', () => {
@@ -174,7 +174,7 @@ function getUrlParameter() {
 }
 
 // Build custom icon for train marker
-function iconBuilder(id, status, hasIncident, hasDelay, focusOn = false) {
+function iconBuilder(id, status, incidentsList, hasDelay, focusOn = false) {
     let image = imageDefault
     let extraClass = ''
    
@@ -193,9 +193,9 @@ function iconBuilder(id, status, hasIncident, hasDelay, focusOn = false) {
             html: `
                 <div class="relative p-1.5 w-10 h-10 ${extraClass}">
                     <img src="${image}" class="w-10 h-10 rounded-md shadow ${focusOn ? 'ring-4 ring-orange-500' : ''}" />
-                    ${hasDelay || hasIncident ? 
+                    ${hasDelay || incidentsList ? 
                         `<div class="absolute flex space-x-0.5 -top-1 -left-1">
-                            ${hasIncident ? `<img src="icons/alert.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
+                            ${incidentsList ? `<img src="icons/alert.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
                             ${hasDelay ? `<img src="icons/clock.svg" class="w-5 h-5 rounded-full border-2 border-red-400 bg-red-100" />` : ''}
                         </div>` 
                     : ''}
@@ -272,7 +272,7 @@ function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a int
 }
 
 // Format popup content
-function formatPopup(data, hasIncident) {
+function formatPopup(data, incidentsList) {
     const status = data.vehicle.currentStatus
     let stopsList = `<ol class="relative mt-2 py-2">
         <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-300"></div>`
@@ -332,14 +332,14 @@ function formatPopup(data, hasIncident) {
                 ${stopsList}
             </div>
 
-            ${hasIncident ? `
-                 <div class="container-incidents flex flex-row items-start space-x-3 mt-5 p-3 bg-red-100 border border-red-400 rounded-md">
-                    <div class="flex-none w-10 h-10 flex items-center justify-center rounded-full bg-red-200">
-                        <img src="icons/alert.svg" class="w-5 h-5 inline-block" />
-                    </div>
-                    <span class="text-sm text-red-700 ">${hasIncident}</span>
-                </div>
-                `
-            : ''}
+            ${incidentsList && incidentsList.length > 0 ? incidentsList.map(incident => {
+                if (!incident) return ''
+                return `<div class="container-incidents flex flex-row items-start space-x-3 mt-5 p-3 bg-red-100 border border-red-400 rounded-md">
+                            <div class="flex-none w-10 h-10 flex items-center justify-center rounded-full bg-red-200">
+                                <img src="icons/alert.svg" class="w-5 h-5 inline-block" />
+                            </div>
+                            <span class="text-sm text-red-700 ">${incident}</span>
+                        </div>`
+            }).join('') : ''}
     `
 }
