@@ -54,21 +54,22 @@ export async function GET () {
                                 departure_time: formatStringTimeToHHMM(stop.departure_time),
                                 latlon: getStationLatLonById(stop.stop_id)
                             }))
-                        
                         }
 
-                        // Search next stop
-                        if (currentStopIndex !== -1) {
-                            const nextStopTime = tripStopTimes[currentStopIndex + 1]
+                        // If current status is INCOMMING_AT it means the train in on the index = (currentStopIndex - 1) stop
+                        // We need to rectify the position and stopId to the real one, because the API gives the position of the next stop when the train is incoming
+                        if (e.vehicle.currentStatus === 'INCOMING_AT' && currentStopIndex !== -1) {
+                            const realStop = tripStopTimes[currentStopIndex - 1]
 
-                            if (nextStopTime) {
-                                const nextStation = getStationNameById(nextStopTime.stop_id)
-                            
-                                e.vehicle.nextStop = {
-                                    stop_id: nextStopTime.stop_id,
-                                    stop_name: nextStation || 'Unknown',
-                                    arrival_time: formatStringTimeToHHMM(nextStopTime.arrival_time),
+                            // Rectify position and stopId
+                            if (realStop) {
+                               const latlon = getStationLatLonById(realStop.stop_id)
+                                e.vehicle.position = {
+                                    latitude: latlon ? latlon.lat : e.vehicle.position.latitude,
+                                    longitude: latlon ? latlon.lon : e.vehicle.position.longitude
                                 }
+
+                                e.vehicle.stopId = realStop.stop_id || e.vehicle.stopId
 
                             }
                         }
@@ -89,6 +90,9 @@ export async function GET () {
                         // Add delay info from trip updates
                         const tripUpdate = tripUpdates.find(update => update.trip_id === e.vehicle.trip.tripId)
                         e.vehicle.delay = tripUpdate ? tripUpdate.delay : 0
+
+                        // Remove - test line
+                        if(e.id === 'VP_R1-25664') console.log(`Train ${e.id} - status ${e.vehicle.currentStatus}`);
 
                     }else {
                         // console.warn(`Warning: Trip not found for trip_id: ${e.vehicle.trip.tripId} on train ID: ${e.id}`)
