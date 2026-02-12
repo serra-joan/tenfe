@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+    --color-r1: #3090CF;
+    --animate-trainloading: trainloading 2s ease-in infinite;
+
+    @keyframes trainloading {
+        0% {
+            /* start at parent's left */
+            left: 0;
+        }
+        60% {
+            left: 100%;
+            bottom: 0;
+            transform: rotate(0);
+        }
+        80% {
+            left: 100%;
+        }
+        100% {
+            left: 100%;
+            bottom: -200px;
+            transform: rotate(90deg);
+        }
+    }
+}
+
 /* Animation for moving trains */
 @keyframes move-left {
     0% { 
