@@ -18,12 +18,13 @@ type TripPayload = {
 type Vehicle = {
   stopId: string
   stopName?: string
+  position: { latitude: number; longitude: number }
   trip: TripPayload
   stops?: { id: string; name: string; arrival_time: string; departure_time: string; latlon?: StopLatLon }[]
-  nextStop?: { stop_id: string; stop_name: string; arrival_time: string }
   start_station?: string
   end_station?: string
   delay: number
+  currentStatus: string
 }
 type TrainElement = { 
     id: string

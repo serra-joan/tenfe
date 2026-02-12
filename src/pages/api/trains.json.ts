@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import { getTripUpdates } from '@/scripts/get-trip-updates'
-import stationsJSON from '@public/estacions_cercanias.json' with { type: 'json' }
+import stationsJSON from '@public/files/output/estacions_cercanias.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
 
@@ -54,21 +54,22 @@ export async function GET () {
                                 departure_time: formatStringTimeToHHMM(stop.departure_time),
                                 latlon: getStationLatLonById(stop.stop_id)
                             }))
-                        
                         }
 
-                        // Search next stop
-                        if (currentStopIndex !== -1) {
-                            const nextStopTime = tripStopTimes[currentStopIndex + 1]
+                        // If current status is INCOMMING_AT it means the train in on the index = (currentStopIndex - 1) stop
+                        // We need to rectify the position and stopId to the real one, because the API gives the position of the next stop when the train is incoming
+                        if (e.vehicle.currentStatus === 'INCOMING_AT' && currentStopIndex !== -1) {
+                            const realStop = tripStopTimes[currentStopIndex - 1]
 
-                            if (nextStopTime) {
-                                const nextStation = getStationNameById(nextStopTime.stop_id)
-                            
-                                e.vehicle.nextStop = {
-                                    stop_id: nextStopTime.stop_id,
-                                    stop_name: nextStation || 'Unknown',
-                                    arrival_time: formatStringTimeToHHMM(nextStopTime.arrival_time),
+                            // Rectify position and stopId
+                            if (realStop) {
+                               const latlon = getStationLatLonById(realStop.stop_id)
+                                e.vehicle.position = {
+                                    latitude: latlon ? latlon.lat : e.vehicle.position.latitude,
+                                    longitude: latlon ? latlon.lon : e.vehicle.position.longitude
                                 }
+
+                                e.vehicle.stopId = realStop.stop_id || e.vehicle.stopId
 
                             }
                         }

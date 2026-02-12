@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initPaintress() 
 
     // Set refresh timer
-    setInterval(initPaintress, REFRESH_TIME * 1000)
+    // setInterval(initPaintress, REFRESH_TIME * 1000)
 })
 
 // Fetch realtime train data and update map
@@ -124,7 +124,7 @@ async function initPaintress() {
 
             // Focus on a train if ID is provided or show error if not found
             if (trainIdToFocus && trainFocusLocation.length === 2) map.setView(trainFocusLocation, 15)
-            else if (trainIdToFocus) setErrorMessage(`No s'ha pogut trobar el tren ${trainIdToFocus}. Pot ser que la API no l'estigui mostrant o que el ID sigui incorrecte. Proba en uns segons.`)
+            else if (trainIdToFocus) setErrorMessage(`No s'ha pogut trobar el tren ${trainIdToFocus}. Si l'ID és correcte, el tren està aturat en l'última parada o no hi ha informació de posició disponible. Quan s'actualitzi, Renfe oferirà la informació i es mostrarà al mapa.`)
         }
 
     } catch (error) {
