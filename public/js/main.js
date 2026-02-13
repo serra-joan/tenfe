@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
    // Initialize map and marker cluster
     map = L.map('map', {
         center: [41.53324928604702, 2.445498794906298],
-        zoom: 12
+        zoom: 12,
+        zoomControl: false,
     })
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
 
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initPaintress() 
 
     // Set refresh timer
-    setInterval(initPaintress, REFRESH_TIME * 1000)
+    // setInterval(initPaintress, REFRESH_TIME * 1000)
 })
 
 // Fetch realtime train data and update map
@@ -67,7 +68,7 @@ async function initPaintress() {
         if (data && data.length > 0) {
             data.forEach(entity => {
                 // Some trains may not have position data, skip those
-                if (!entity.vehicle.position.latitude || !entity.vehicle.position.longitude) {
+                if (!entity.vehicle.position || !entity.vehicle.position.latitude || !entity.vehicle.position.longitude) {
                     console.warn(`Train ${entity.id ?? 'unknown'} has no position data, skipping.`)
                     return
                 }
@@ -100,7 +101,7 @@ async function initPaintress() {
                     entity.vehicle.position.latitude,
                     entity.vehicle.position.longitude
                 ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, (incidentsList.length > 0), hasDelay, focusOn) })
-                .bindPopup(formatPopup(entity, incidentsList), { width: "550px" })
+                .bindPopup(formatPopup(entity, incidentsList), { autoClose: false })
 
                 // On popup open
                 marker.on('popupopen', () => {
@@ -158,13 +159,17 @@ document.addEventListener('click', (e) => {
         url.searchParams.set('trainId', trainId)
 
         // Copy to clipboard
-        navigator.clipboard.writeText(url.toString()).then(() => {
-            const msg = target.nextElementSibling
+        navigator.clipboard.writeText(url.toString()).then(() => {            
+            const label = target.querySelector('span')
             
-            if (msg) {
-                msg.classList.remove('hidden')
+            // Revert text after 4 seconds
+            if (label) {
+                label.textContent = 'Link copiat!'
+                label.classList.add('text-green-700')
+
                 setTimeout(() => {
-                    msg.classList.add('hidden')
+                    label.textContent = 'Compartir tren'
+                    label.classList.remove('text-green-700')
                 }, 4000)
             }
         })
@@ -302,7 +307,7 @@ function formatPopup(data, incidentsList) {
 
             // `id="current-stop-${data.id}"` is used to scroll into view when popup opens
             stopsList += `
-                <li ${isCurrent ? `id="current-stop-${data.id}"` : ''} class="flex items-start px-2 py-4 ${isCurrent ? 'font-bold bg-yellow-100 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
+                <li ${isCurrent ? `id="current-stop-${data.id}"` : ''} class="flex items-start text-sm px-2 py-2 ${isCurrent ? 'font-bold bg-yellow-100 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
                     <div class=" flex-col w-6 text-right select-none">
                         <span class="${delayArrivalTime ? 'line-through' : ''}">${stop.arrival_time}</span>
                         ${delayArrivalTime ? `<span class="text-red-600">${delayArrivalTime}</span>` : ''}
@@ -321,35 +326,39 @@ function formatPopup(data, incidentsList) {
 
     return `
             <div class="mb-2" data-trainid="${data.id}">
-                <h3 class="text-lg font-bold">Destinació: ${data.vehicle.end_station || 'N/A'}</h3>
-                <div class="flex justify-between text-sm text-gray-600 mb-2">
-                    <small>Tren ID: ${data.id}</small>
-                    <small>Última actualització: ${formatDate(data.vehicle.timestamp)}</small>
-                </div>
-
-                <div class="flex space-x-2 items-center">
-                    <div class="btnShare flex items-center space-x-2 cursor-pointer px-2 py-1 rounded-full border border-gray-300 hover:bg-gray-100 w-max">
-                        <span>Compartir tren</span>
-                        <img src="icons/share.svg" class="w-4 h-4 rounded-md" />
+                <h3 class="text-lg font-bold">${data.vehicle.end_station || 'N/A'}</h3>
+                <div class="flex space-x-2 items-start">
+                    <div class="btnShare flex items-center space-x-2 cursor-pointer px-4 py-2 rounded-xl border border-gray-300 hover:bg-gray-100 w-max">
+                        <span class="text-md uppercase">Compartir tren</span>
+                        <img src="icons/share.svg" class="w-5 h-5 rounded-md" />
                     </div>
 
-                    <small class="hidden text-blue-400">Link copiat!</small>
+                    <div class="flex-1 min-w-0 flex flex-col text-end text-sm text-gray-600 mb-2">
+                        <small>Tren ID: ${data.id}</small>
+                        <small>Últ. act.: ${formatDate(data.vehicle.timestamp)}</small>
+                    </div>
                 </div>
             </div>
 
             <h3 class="mt-4 font-semibold">Parades:</h3>
-            <div id="stops-${data.id}" class="max-h-40 overflow-y-auto">
+            <div id="stops-${data.id}" class="max-h-40 overflow-y-auto mb-2">
                 ${stopsList}
             </div>
 
-            ${incidentsList && incidentsList.length > 0 ? incidentsList.map(incident => {
-                if (!incident) return ''
-                return `<div class="container-incidents flex flex-row items-start space-x-3 mt-5 p-3 bg-red-100 border border-red-400 rounded-md">
-                            <div class="flex-none w-10 h-10 flex items-center justify-center rounded-full bg-red-200">
-                                <img src="icons/alert.svg" class="w-5 h-5 inline-block" />
-                            </div>
-                            <span class="text-sm text-red-700 ">${incident}</span>
-                        </div>`
-            }).join('') : ''}
+            ${
+                incidentsList && incidentsList.length > 0 ? `
+                    ${ '<div class="max-h-36 overflow-y-scroll text-xs md:max-h-56 md:text-sm md:overflow-y-auto">' +
+                        incidentsList.map(incident => {
+                            if (!incident) return ''
+                            return `<div class="container-incidents h-16 flex flex-row items-start space-x-3 mt-2 p-3 bg-red-100 border border-red-400 rounded-md">
+                                        <div class="flex-none w-8 h-8 flex items-center justify-center rounded-full bg-red-200">
+                                            <img src="icons/alert.svg" class="w-4 h-4 inline-block" />
+                                        </div>
+                                        <span class="text-red-700 ">${incident}</span>
+                                    </div>`
+                        }).join('') 
+                    }` + '</div>'
+                : ''
+            }
     `
 }
