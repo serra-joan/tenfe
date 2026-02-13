@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initPaintress() 
 
     // Set refresh timer
-    // setInterval(initPaintress, REFRESH_TIME * 1000)
+    setInterval(initPaintress, REFRESH_TIME * 1000)
 })
 
 // Fetch realtime train data and update map
