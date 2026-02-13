@@ -12,7 +12,7 @@ import fs from 'fs'
 import path from 'path'
 import readline from 'readline'
 
-const LINES_TO_FILTER = ['R1', 'RG1']
+const LINES_TO_FILTER = ['R1']
 const LABELS = ['route_id', 'service_id', 'trip_id', 'trip_headsign', 'wheelchair_accessible', 'block_id', 'shape_id']
 
 // Rutes fitxers

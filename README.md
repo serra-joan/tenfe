@@ -2,7 +2,7 @@
 _Nom provisional_
 
 Projecte per provar l'API de Renfe Cercanias. Actualment l'API no té gaire, haig d'agafar dades de `.json` i `.txt`, ja que no acabo d'entendre com funciona.
-El projecte és una mini web que et crea un mapa amb l'ubicació dels trens en temps real, de moment només de R1 i RG1 (els fitxers s'actualitzen cada 30 s).
+El projecte és una mini web que et crea un mapa amb l'ubicació dels trens en temps real, de moment només d'R1 (els fitxers s'actualitzen cada 30 s).
 
 ## Estructura
 El projecta està dins el framework [Astro](https://astro.build/), així doncs, l'estructura principal segueix el seu estàndard.

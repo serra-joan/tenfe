@@ -20,14 +20,14 @@ export async function GET () {
         const r = await fetch(TARGET)
         const data = await r.json()
 
-        // Only R1 and RG1
+        // Only R1
         if (data.entity && data.entity.length > 0) {
             const tripUpdates = await getTripUpdates()
 
             // Filter and set data
             trainsFiltered = data.entity.filter((e: TrainElement) => {
-                if (e.id.includes('R1-') || e.id.includes('RG1-')) {
-                    const line = e.id.includes('R1-') ? 'R1' : 'RG1'
+                if (e.id.includes('R1-')) {
+                    const line = 'R1'
 
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 

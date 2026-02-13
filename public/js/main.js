@@ -8,7 +8,6 @@ let markers
 
 // Icons
 const imageR1 = 'images/lines/r1.webp'
-const imageRG1 = 'images/lines/rg1.webp'
 const imageDefault = 'images/lines/rodalies.webp'
 
 // Fetch train data from proxy server
@@ -181,12 +180,8 @@ function getUrlParameter() {
 
 // Build custom icon for train marker
 function iconBuilder(id, status, incidentsList, hasDelay, focusOn = false) {
-    let image = imageDefault
+    let image = id.includes('R1-') ? imageR1 : imageDefault
     let extraClass = ''
-   
-    // Image
-    if (id.includes('R1-')) image = imageR1
-    else if (id.includes('RG1-')) image = imageRG1
 
     // Status image
     if (status === 'INCOMING_AT') extraClass = 'animate-moving-left'
