@@ -37,11 +37,11 @@ function mapLineToObj (parts) {
   return obj
 }
 
-// FILTRE -> si `route_id` o `shape_id` conté la LINES_TO_FILTER (line)
+// FILTRE -> si `route_short_name` és igual a la LINES_TO_FILTER (line)
 function matchesLine (row, lineTrain) {
   if (!lineTrain) return false
   // Coincidència simple:
-  if ((row.route_id && row.route_id.includes(lineTrain)) || (row.shape_id && row.shape_id.includes(lineTrain))) return true
+  if (row.route_short_name && row.route_short_name === lineTrain) return true
   return false
 }
 
