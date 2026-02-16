@@ -5,7 +5,9 @@ const BASE_HEADERS = {
     'Content-Type': 'application/json',
     'X-Content-Type-Options': 'nosniff',
     'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-    // Cache-Control': 'public, s-maxage=30, stale-while-revalidate=0, must-revalidate'
+    'X-Frame-Options': 'DENY', 
+    'Referrer-Policy': 'no-referrer',
+    'Permissions-Policy': 'interest-cohort=()'
 }
 
 export async function GET () {

@@ -6,9 +6,13 @@ type StopLatLon = {
 }
 type Stop = { 
     stop_id: string
+    trip_id: string
     arrival_time: string
     departure_time: string
-    trip_id: string
+}
+type StopJSON = {
+    R1: Stop[]
+    R11: Stop[]
 }
 type TripPayload = { 
     tripId: string
@@ -29,5 +33,5 @@ type Vehicle = {
 type TrainElement = { 
     id: string
     vehicle: Vehicle
-    stops?: Stop[]
+    stops?: { id: string; name: string, arrival_time: string; departure_time: string; latlon: StopLatLon | null }[]
 }

@@ -10,10 +10,12 @@ const BASE_HEADERS = {
     'Content-Type': 'application/json',
     'X-Content-Type-Options': 'nosniff',
     'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-    // Cache-Control': 'public, s-maxage=30, stale-while-revalidate=0, must-revalidate'
+    'X-Frame-Options': 'DENY',
+    'Referrer-Policy': 'no-referrer',
+    'Permissions-Policy': 'interest-cohort=()'
 }
 
-export async function GET () {
+export async function GET({ request }: { request: Request }) {
     let trainsFiltered: TrainElement[] = []
 
     try {
@@ -43,7 +45,7 @@ export async function GET () {
 
                         // Next stop info 
                         // Get all stops from tripId, then get the actual stopId, search in stop_times and with the 'arrival_time' search the next stop
-                        const tripStopTimes = stop_times[line].filter((stop: Stop) => stop.trip_id === e.vehicle.trip.tripId)
+                        const tripStopTimes = (stop_times as StopJSON)[line].filter((stop: Stop) => stop.trip_id === e.vehicle.trip.tripId)
                         const currentStopIndex = tripStopTimes.findIndex((stop: Stop) => stop.stop_id == e.vehicle.stopId)
 
                         // Set stops info
@@ -114,11 +116,11 @@ export async function GET () {
                 }
             )
 
-        }else return new Response(JSON.stringify({ error: 'No data available' }), { status: 404, headers: BASE_HEADERS })
+        }else return new Response(JSON.stringify({ error: 'No data available' }), { status: 404, headers: { ...BASE_HEADERS } })
 
     } catch (err) {
         console.error('Error fetching or processing data:', err)
-        return new Response(JSON.stringify({ error: 'Failed to fetch or process data' }), { status: 500, headers: BASE_HEADERS })
+        return new Response(JSON.stringify({ error: 'Failed to fetch or process data' }), { status: 500, headers: { ...BASE_HEADERS } })
     }
   
 }
