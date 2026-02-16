@@ -14,7 +14,7 @@ import path from 'path'
 import readline from 'readline'
 import TRIPS from '../public/files/output/trips_filtered.json' with { type: 'json' }
 
-const LINES_TO_FILTER = ['R1']
+const LINES_TO_FILTER = ['R1', 'R11', 'RG1']
 const LABELS = ['trip_id','arrival_time','departure_time', 'stop_id', 'stop_sequence']
 // Agafar tots els IDs dels viatges (ja que la parada es relaciona amb el viatge)
 const TRIPS_IDS = Object.keys(TRIPS).map(line => {

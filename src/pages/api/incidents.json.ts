@@ -21,8 +21,9 @@ export async function GET () {
             data.entity.map((e: IncidentRawElement) => {
                 const informedEntity = e.alert?.informedEntity || []
 
-                // Check if the alert is related to R1 line (can be routes not from R1, because one incident can affect several routes)
-                if (informedEntity.some((entity: InformedEntity) => entity.routeId && entity.routeId.includes('R1'))) {
+                // Check if the alert is related to R1 or R11 line (can be routes not from [R1, R11 or RG1], because one incident can affect several routes)
+                // Don't need to check routeId.includes('R11'), becouse if entity.routeId.includes('R1') is true on "R11".
+                if (informedEntity.some((entity: InformedEntity) => entity.routeId && (entity.routeId.includes('R1') || entity.routeId.includes('RG1')) )) {
                     const incident: IncidentElement = {}
 
                     // Get routes
