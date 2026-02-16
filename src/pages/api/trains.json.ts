@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import { getTripUpdates } from '@/scripts/get-trip-updates'
-import stationsJSON from '@public/files/output/estacions_cercanias.json' with { type: 'json' }
+import stationsJSON from '@public/files/output/estacions.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
 
@@ -26,8 +26,9 @@ export async function GET () {
 
             // Filter and set data
             trainsFiltered = data.entity.filter((e: TrainElement) => {
-                if (e.id.includes('R1-')) {
-                    const line = 'R1'
+                // Filter only R1 and R11 lines
+                if (e.id.includes('R1-') || e.id.includes('R11-')) { 
+                    const line = e.id.includes('R1-') ? 'R1' : 'R11'
 
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 
