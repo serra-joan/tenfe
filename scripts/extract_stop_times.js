@@ -5,7 +5,7 @@
  * @param rawFilePath public/files/raw/stop_times.txt
  * @param outputDir public/files/output
  * 
- * EXEC: node src/scripts/extract_stop_times.js
+ * EXEC: node scripts/extract_stop_times.js
  * Nota: Per poder extraure aquestes dades es necessita primer el fitxer que conté els `trips` -> output/trips_filtered.json
  * 
  */

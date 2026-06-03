@@ -5,7 +5,7 @@
  * @param rawFilePath public/files/raw/trips.txt
  * @param outputDir public/files/output
  * 
- * EXEC: node src/scripts/extract_trips.js
+ * EXEC: node scripts/extract_trips.js
  * 
  */
 import fs from 'fs'

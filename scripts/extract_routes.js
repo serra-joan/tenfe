@@ -5,7 +5,7 @@
  * @param rawFilePath public/files/raw/routes.txt
  * @param outputDir public/files/output
  * 
- * EXEC: node src/scripts/extract_routes.js
+ * EXEC: node scripts/extract_routes.js
  * 
  */
 import fs from 'fs'
