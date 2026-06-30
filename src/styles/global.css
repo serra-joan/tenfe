@@ -60,6 +60,14 @@
 .leaflet-popup-content {
     margin: 4px 8px !important;
 }
+/* Leaflet popup dark theme */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: #111827;
+    color: #f3f4f6;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
 /* Container for the incidents alert. Animate with height */ 
 .container-incidents {
     overflow: hidden;

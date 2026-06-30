@@ -171,11 +171,11 @@ document.addEventListener('click', (e) => {
             // Revert text after 4 seconds
             if (label) {
                 label.textContent = 'Link copiat!'
-                label.classList.add('text-green-700')
+                label.classList.add('text-green-400')
 
                 setTimeout(() => {
                     label.textContent = 'Compartir tren'
-                    label.classList.remove('text-green-700')
+                    label.classList.remove('text-green-400')
                 }, 4000)
             }
         })
@@ -303,7 +303,7 @@ function setLoading(isLoading) {
 function formatPopup(data, incidentsList) {
     const status = data.vehicle.currentStatus
     let stopsList = `<ol class="relative mt-2 py-2">
-        <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-300"></div>`
+        <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-600"></div>`
 
     if(data.stops) {
         const delay = data.vehicle.delay // seconds
@@ -320,13 +320,13 @@ function formatPopup(data, incidentsList) {
 
             // `id="current-stop-${data.id}"` is used to scroll into view when popup opens
             stopsList += `
-                <li ${isCurrent ? `id="current-stop-${data.id}"` : ''} class="flex items-start text-sm px-2 py-2 ${isCurrent ? 'font-bold bg-yellow-100 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
+                <li ${isCurrent ? `id="current-stop-${data.id}"` : ''} class="flex items-start text-sm px-2 py-2 ${isCurrent ? 'font-bold bg-yellow-600/70 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
                     <div class=" flex-col w-6 text-right select-none">
                         <span class="${delayArrivalTime ? 'line-through' : ''}">${stop.arrival_time}</span>
-                        ${delayArrivalTime ? `<span class="text-red-600">${delayArrivalTime}</span>` : ''}
+                        ${delayArrivalTime ? `<span class="text-red-400">${delayArrivalTime}</span>` : ''}
                     </div>
                     <div class="relative w-4.5 ms-4 flex items-start justify-center">
-                        <div class="w-3 h-3 bg-black rounded-full border border-gray-700 z-10 mt-1 ${status === 'INCOMING_AT' && isCurrent ? 'animate-moving-down' : ''}"></div>
+                        <div class="w-3 h-3 bg-gray-200 rounded-full border border-gray-500 z-10 mt-1 ${status === 'INCOMING_AT' && isCurrent ? 'animate-moving-down' : ''}"></div>
                     </div>
                     <span class="ms-2">${stop.name}</span>
                 </li>
@@ -341,12 +341,12 @@ function formatPopup(data, incidentsList) {
             <div class="mb-2" data-trainid="${data.id}">
                 <h3 class="text-lg font-bold">${data.vehicle.end_station || 'N/A'}</h3>
                 <div class="flex space-x-2 items-start">
-                    <div class="btnShare flex items-center space-x-2 cursor-pointer px-4 py-2 rounded-xl border border-gray-300 hover:bg-gray-100 w-max">
+                    <div class="btnShare flex items-center space-x-2 cursor-pointer px-4 py-2 rounded-xl border border-gray-600 hover:bg-gray-800 w-max">
                         <span class="text-md uppercase">Compartir tren</span>
-                        <img src="icons/share.svg" class="w-5 h-5 rounded-md" />
+                        <img src="icons/share.svg" class="w-5 h-5 invert rounded-md" />
                     </div>
 
-                    <div class="flex-1 min-w-0 flex flex-col text-end text-sm text-gray-600 mb-2">
+                    <div class="flex-1 min-w-0 flex flex-col text-end text-sm text-gray-400 mb-2">
                         <small>Tren ID: ${data.id}</small>
                         <small>Últ. act.: ${formatDate(data.vehicle.timestamp)}</small>
                     </div>
@@ -363,11 +363,11 @@ function formatPopup(data, incidentsList) {
                     ${ '<div class="max-h-36 overflow-y-scroll text-xs md:max-h-56 md:text-sm md:overflow-y-auto">' +
                         incidentsList.map(incident => {
                             if (!incident) return ''
-                            return `<div class="container-incidents h-16 flex flex-row items-start space-x-3 mt-2 p-3 bg-red-100 border border-red-400 rounded-md">
-                                        <div class="flex-none w-8 h-8 flex items-center justify-center rounded-full bg-red-200">
+                            return `<div class="container-incidents h-16 flex flex-row items-start space-x-3 mt-2 p-3 bg-red-950 border border-red-800 rounded-md">
+                                        <div class="flex-none w-8 h-8 flex items-center justify-center rounded-full bg-red-900">
                                             <img src="icons/alert.svg" class="w-4 h-4 inline-block" />
                                         </div>
-                                        <span class="text-red-700 ">${incident}</span>
+                                        <span class="text-red-400">${incident}</span>
                                     </div>`
                         }).join('') 
                     }` + '</div>'
