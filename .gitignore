@@ -1,8 +1,7 @@
 # Files
 public/files/raw/*
 !public/files/raw/.gitkeep
-public/files/output/*
-!public/files/output/.gitkeep
+# public/files/output/ → fitxers generats, inclosos al repo i actualitzats per GitHub Actions
 
 # build output
 dist/

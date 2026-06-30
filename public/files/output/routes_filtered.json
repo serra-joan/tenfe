@@ -1,0 +1,344 @@
+{
+  "R1": [
+    {
+      "route_id": "51T0001R1",
+      "route_short_name": "R1",
+      "route_long_name": "Molins de Rei - Maçanet-Massanes",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0002R1",
+      "route_short_name": "R1",
+      "route_long_name": "Maçanet-Massanes - Molins de Rei",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0043R1",
+      "route_short_name": "R1",
+      "route_long_name": "Canet de Mar - Blanes",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0044R1",
+      "route_short_name": "R1",
+      "route_long_name": "Blanes - Canet de Mar",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0049R1",
+      "route_short_name": "R1",
+      "route_long_name": "Mataró - Badalona",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0050R1",
+      "route_short_name": "R1",
+      "route_long_name": "Badalona - Mataró",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0063R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0064R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0065R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0066R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "7DBCEC",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0141R1",
+      "route_short_name": "R1",
+      "route_long_name": "Lleida - ",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0142R1",
+      "route_short_name": "R1",
+      "route_long_name": "-Lleida",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0143R1",
+      "route_short_name": "R1",
+      "route_long_name": "Riba-roja d'Ebre - ",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0144R1",
+      "route_short_name": "R1",
+      "route_long_name": "-Riba-roja d'Ebre",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0145R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0146R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0147R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0148R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0149R1",
+      "route_short_name": "R1",
+      "route_long_name": "Binefar - ",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0150R1",
+      "route_short_name": "R1",
+      "route_long_name": "-Binefar",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0151R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0152R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0153R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0154R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0155R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0156R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0157R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0158R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0159R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0160R1",
+      "route_short_name": "R1",
+      "route_long_name": "-",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0161R1",
+      "route_short_name": "R1",
+      "route_long_name": "Riba-roja d'Ebre - ",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0162R1",
+      "route_short_name": "R1",
+      "route_long_name": "-Riba-roja d'Ebre",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0167R1",
+      "route_short_name": "R1",
+      "route_long_name": "Sant Vicenc de Calders - Tarragona",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0168R1",
+      "route_short_name": "R1",
+      "route_long_name": "Tarragona - Sant Vicenc de Calders",
+      "route_type": "2",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0215R1",
+      "route_short_name": "R1",
+      "route_long_name": "Mataró - Maçanet-Massanes",
+      "route_type": "3",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0216R1",
+      "route_short_name": "R1",
+      "route_long_name": "Calella - Mataró",
+      "route_type": "3",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    }
+  ],
+  "R11": [
+    {
+      "route_id": "51T0093R11",
+      "route_short_name": "R11",
+      "route_long_name": "Figueres - Barcelona-Sants",
+      "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0094R11",
+      "route_short_name": "R11",
+      "route_long_name": "Barcelona-Sants - Figueres",
+      "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0119R11",
+      "route_short_name": "R11",
+      "route_long_name": "Barcelona-Sant Andreu - Girona",
+      "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0120R11",
+      "route_short_name": "R11",
+      "route_long_name": "Girona - Barcelona-Sant Andreu",
+      "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    }
+  ],
+  "RG1": [
+    {
+      "route_id": "51T0111RG1",
+      "route_short_name": "RG1",
+      "route_long_name": "Maçanet-Massanes - Figueres",
+      "route_type": "2",
+      "route_color": "409EF5",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0112RG1",
+      "route_short_name": "RG1",
+      "route_long_name": "Figueres - Maçanet-Massanes",
+      "route_type": "2",
+      "route_color": "409EF5",
+      "route_text_color": "FFFFFF"
+    }
+  ]
+}
