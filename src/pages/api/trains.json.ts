@@ -5,6 +5,23 @@ import stationsJSON from '@public/files/output/estacions.json' with { type: 'jso
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
 
+// Pre-build O(1) lookup maps at module level (built once, reused across requests)
+const stationMap = new Map<string, any[]>(
+    (stationsJSON.records as any[]).map(r => [String(r[1]), r])
+)
+const tripsMap: Record<string, Map<string, any>> = {
+    R1: new Map((trips as any).R1.map((t: any) => [t.trip_id, t])),
+    R11: new Map((trips as any).R11.map((t: any) => [t.trip_id, t]))
+}
+const stopTimesMap: Record<string, Map<string, Stop[]>> = { R1: new Map(), R11: new Map() }
+for (const line of ['R1', 'R11'] as const) {
+    for (const stop of (stop_times as StopJSON)[line]) {
+        const arr = stopTimesMap[line].get(stop.trip_id) ?? []
+        arr.push(stop)
+        stopTimesMap[line].set(stop.trip_id, arr)
+    }
+}
+
 const TARGET = 'https://gtfsrt.renfe.com/vehicle_positions.json'
 const BASE_HEADERS = {
     'Content-Type': 'application/json',
@@ -35,7 +52,7 @@ export async function GET({ request }: { request: Request }) {
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 
                     // Add trip info
-                    const trip = trips[line].find(trip => trip.trip_id === e.vehicle.trip.tripId)
+                    const trip = tripsMap[line].get(e.vehicle.trip.tripId)
                     if (trip) {
                         e.vehicle.trip = {
                             ...e.vehicle.trip,
@@ -45,7 +62,7 @@ export async function GET({ request }: { request: Request }) {
 
                         // Next stop info 
                         // Get all stops from tripId, then get the actual stopId, search in stop_times and with the 'arrival_time' search the next stop
-                        const tripStopTimes = (stop_times as StopJSON)[line].filter((stop: Stop) => stop.trip_id === e.vehicle.trip.tripId)
+                        const tripStopTimes = stopTimesMap[line].get(e.vehicle.trip.tripId) ?? []
                         const currentStopIndex = tripStopTimes.findIndex((stop: Stop) => stop.stop_id == e.vehicle.stopId)
 
                         // Set stops info
@@ -98,7 +115,7 @@ export async function GET({ request }: { request: Request }) {
                         // console.warn(`Warning: Trip not found for trip_id: ${e.vehicle.trip.tripId} on train ID: ${e.id}`)
                     }
 
-                    return e
+                    return true
                 }
                 
                 return false
@@ -128,17 +145,13 @@ export async function GET({ request }: { request: Request }) {
 
 // Helper get station name
 function getStationNameById(id: string): string {
-    const stations: any[] = stationsJSON.records
-
-    const station = stations.find(station => station[1] == id)
+    const station = stationMap.get(String(id))
     return station ? station[2] : 'Unknown' // [2] is the station name
 }
 
 // Helper to get the lat lon of a station by ID
 function getStationLatLonById(id: string): StopLatLon | null {
-    const stations: any[] = stationsJSON.records
-
-    const station = stations.find(station => station[1] == id)
+    const station = stationMap.get(String(id))
     return station ? { lat: parseFloat(station[3]), lon: parseFloat(station[4]) } : null // [3] latitude, [4] longitude
 }
 

@@ -6,6 +6,9 @@ let map
 // Marker cluster
 let markers
 
+// Countdown interval reference (cleared on each refresh to avoid leaks)
+let countdownInterval = null
+
 // Icons
 const imageR1 = 'images/lines/r1.webp'
 const imageR11 = 'images/lines/r11.webp'
@@ -42,19 +45,17 @@ async function initPaintress() {
     // Clear error message
     setErrorMessage('', true)
 
-    // Get incidents data
-    const incidents = await getIncidents()
-    
     // Set time left
     const refreshTimeEl = document.getElementById('refreshTime')
 
     if (refreshTimeEl) {
         let timeLeft = REFRESH_TIME
-        const interval = setInterval(() => {
+        if (countdownInterval) clearInterval(countdownInterval)
+        countdownInterval = setInterval(() => {
             timeLeft--
             refreshTimeEl.textContent = timeLeft
 
-            if (timeLeft <= 0) clearInterval(interval)
+            if (timeLeft <= 0) clearInterval(countdownInterval)
         }, 1000)
     }
 
@@ -65,7 +66,10 @@ async function initPaintress() {
     markers.clearLayers()
 
     try {
-        const data = await fetch('/api/trains.json').then(res => res.json())
+        const [incidents, data] = await Promise.all([
+            getIncidents(),
+            fetch('/api/trains.json').then(res => res.json())
+        ])
 
         if (data && data.length > 0) {
             data.forEach(entity => {
