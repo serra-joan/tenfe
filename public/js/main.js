@@ -9,6 +9,13 @@ let markers
 // Countdown interval reference (cleared on each refresh to avoid leaks)
 let countdownInterval = null
 
+// Filter state - all lines active by default
+const activeLines = new Set(['R1', 'R11', 'RG1'])
+
+// Cache last fetched data for re-rendering on filter toggle
+let lastData = null
+let lastIncidents = []
+
 // Icons
 const imageR1 = 'images/lines/r1.webp'
 const imageR11 = 'images/lines/r11.webp'
@@ -59,12 +66,6 @@ async function initPaintress() {
         }, 1000)
     }
 
-    const trainIdToFocus = getUrlParameter()
-    let trainFocusLocation = []
-
-    // Clear existing markers
-    markers.clearLayers()
-
     try {
         const [incidents, data] = await Promise.all([
             getIncidents(),
@@ -72,65 +73,16 @@ async function initPaintress() {
         ])
 
         if (data && data.length > 0) {
-            data.forEach(entity => {
-                // Some trains may not have position data, skip those
-                if (!entity.vehicle.position || !entity.vehicle.position.latitude || !entity.vehicle.position.longitude) {
-                    console.warn(`Train ${entity.id ?? 'unknown'} has no position data, skipping.`)
-                    return
-                }
-                
-                // If it's the train to focus, save its location
-                let focusOn = false
-                if (trainIdToFocus && entity.id === trainIdToFocus) {
-                    focusOn = true
-                    trainFocusLocation = [
-                        entity.vehicle.position.latitude,
-                        entity.vehicle.position.longitude
-                    ]
-                }
+            lastData = data
+            lastIncidents = incidents
 
-                // Has incidents?
-                let incidentsList = []
-                if (incidents.length > 0) {
-                    incidents.forEach(incident => {
-                        if (incident.routes && incident.routes.some(route => entity.vehicle.trip.route_id && entity.vehicle.trip.route_id.includes(route))) {
-                            incidentsList.push(`${incident.description}`)
-                        }
-                    })
-                }
+            renderMarkers(data, incidents)
 
-                // Has delay?
-                let hasDelay = (entity.vehicle.delay && entity.vehicle.delay > 0)
-
-                // Create marker
-                const marker = L.marker([
-                    entity.vehicle.position.latitude,
-                    entity.vehicle.position.longitude
-                ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, (incidentsList.length > 0), hasDelay, focusOn) })
-                .bindPopup(formatPopup(entity, incidentsList), { autoClose: false })
-
-                // On popup open
-                marker.on('popupopen', () => {
-                    const popupEl = marker.getPopup().getElement()
-                    if (!popupEl) return
-
-                    // Scroll to current stop
-                    const current = popupEl.querySelector(`#current-stop-${entity.id}`)
-                    if (current) current.scrollIntoView({ block: 'start' }) // Scroll to current stop
-
-                    // Draw route on map
-                    const latlonList = popupEl.querySelectorAll(`li[data-latlon]`)
-                    if (latlonList && latlonList.length > 0) drawTrainRoutes(marker, latlonList)
-                })
-
-                markers.addLayer(marker)
-            })
-            
-            map.addLayer(markers)
-
-            // Focus on a train if ID is provided or show error if not found
-            if (trainIdToFocus && trainFocusLocation.length === 2) map.setView(trainFocusLocation, 15)
-            else if (trainIdToFocus) setErrorMessage(`No s'ha pogut trobar el tren ${trainIdToFocus}. Si l'ID és correcte, el tren està aturat en l'última parada o no hi ha informació de posició disponible. Quan s'actualitzi, Renfe oferirà la informació i es mostrarà al mapa.`)
+            // Show error if focused train not found in data at all
+            const trainIdToFocus = getUrlParameter()
+            if (trainIdToFocus && !data.some(e => e.id === trainIdToFocus)) {
+                setErrorMessage(`No s'ha pogut trobar el tren ${trainIdToFocus}. Si l'ID és correcte, el tren està aturat en l'última parada o no hi ha informació de posició disponible. Quan s'actualitzi, Renfe oferirà la informació i es mostrarà al mapa.`)
+            }
         }
 
     } catch (error) {
@@ -152,6 +104,90 @@ async function getIncidents() {
         console.error('Error loading incidents data:', error)
         return []
     }
+}
+
+// Get line name from train ID (check RG1/R11 before R1 to avoid substring match)
+function getLineFromId(id) {
+    if (!id) return null
+    if (id.includes('RG1-')) return 'RG1'
+    if (id.includes('R11-')) return 'R11'
+    if (id.includes('R1-')) return 'R1'
+    return null
+}
+
+// Toggle line visibility and re-render with cached data
+function toggleLine(line) {
+    if (activeLines.has(line)) activeLines.delete(line)
+    else activeLines.add(line)
+
+    const btn = document.getElementById(`filter-${line}`)
+    if (btn) btn.classList.toggle('line-filter-inactive', !activeLines.has(line))
+
+    if (lastData) renderMarkers(lastData, lastIncidents)
+}
+window.toggleLine = toggleLine
+
+// Render markers filtered by activeLines
+function renderMarkers(data, incidents) {
+    markers.clearLayers()
+
+    const trainIdToFocus = getUrlParameter()
+    let trainFocusLocation = []
+
+    data.forEach(entity => {
+        if (!entity.vehicle.position || !entity.vehicle.position.latitude || !entity.vehicle.position.longitude) {
+            console.warn(`Train ${entity.id ?? 'unknown'} has no position data, skipping.`)
+            return
+        }
+
+        // Save focus location before filtering so navigation works even if line is toggled off
+        if (trainIdToFocus && entity.id === trainIdToFocus) {
+            trainFocusLocation = [entity.vehicle.position.latitude, entity.vehicle.position.longitude]
+        }
+
+        // Filter by active line
+        const line = getLineFromId(entity.id)
+        if (line && !activeLines.has(line)) return
+
+        const focusOn = !!(trainIdToFocus && entity.id === trainIdToFocus)
+
+        // Has incidents?
+        let incidentsList = []
+        if (incidents.length > 0) {
+            incidents.forEach(incident => {
+                if (incident.routes && incident.routes.some(route => entity.vehicle.trip.route_id && entity.vehicle.trip.route_id.includes(route))) {
+                    incidentsList.push(`${incident.description}`)
+                }
+            })
+        }
+
+        // Has delay?
+        let hasDelay = (entity.vehicle.delay && entity.vehicle.delay > 0)
+
+        // Create marker
+        const marker = L.marker([
+            entity.vehicle.position.latitude,
+            entity.vehicle.position.longitude
+        ], { icon: iconBuilder(entity.id, entity.vehicle.currentStatus, (incidentsList.length > 0), hasDelay, focusOn) })
+        .bindPopup(formatPopup(entity, incidentsList), { autoClose: false })
+
+        marker.on('popupopen', () => {
+            const popupEl = marker.getPopup().getElement()
+            if (!popupEl) return
+
+            const current = popupEl.querySelector(`#current-stop-${entity.id}`)
+            if (current) current.scrollIntoView({ block: 'start' })
+
+            const latlonList = popupEl.querySelectorAll(`li[data-latlon]`)
+            if (latlonList && latlonList.length > 0) drawTrainRoutes(marker, latlonList)
+        })
+
+        markers.addLayer(marker)
+    })
+
+    map.addLayer(markers)
+
+    if (trainIdToFocus && trainFocusLocation.length === 2) map.setView(trainFocusLocation, 15)
 }
 
 // Event copy follow link

@@ -12,6 +12,21 @@ import Layout from '@/layouts/Layout.astro';
 
     <div class="relative w-full flex-1 min-h-0">
         <div id="map" class="map-container h-full rounded-xl z-0"></div>
+        <!-- Line filter buttons -->
+        <div id="line-filters" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-1000 flex flex-wrap justify-center gap-2 w-[90%]">
+            <button id="filter-R1" onclick="toggleLine('R1')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+                <img src="/images/lines/r1.webp" class="w-5 h-5 rounded" alt="" />
+                R1
+            </button>
+            <button id="filter-R11" onclick="toggleLine('R11')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+                <img src="/images/lines/r11.webp" class="w-5 h-5 rounded" alt="" />
+                R11
+            </button>
+            <button id="filter-RG1" onclick="toggleLine('RG1')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+                <img src="/images/lines/rg1.webp" class="w-5 h-5 rounded" alt="" />
+                RG1
+            </button>
+        </div>
         <div id="loading" class="absolute block top-0 left-0 z-10 w-full h-full">
             <div class="relative w-full h-full flex items-center justify-center">
                 <div class="relative border-b-3 border-r1 w-1/2 z-20 md:w-1/4 md:border-b-5 rounded-xl">

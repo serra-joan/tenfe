@@ -68,6 +68,12 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
+/* Inactive filter button */
+.line-filter-inactive {
+    opacity: 0.35;
+    filter: grayscale(1);
+}
+
 /* Container for the incidents alert. Animate with height */ 
 .container-incidents {
     overflow: hidden;
