@@ -1,9 +1,8 @@
 // Canviar la versió força que el SW s'actualitzi i buida la caché antiga
-const CACHE_NAME = 'tenfe-v1'
+const CACHE_NAME = 'tenfe-v2'
 
 // Recursos estàtics que es descarreguen i es guarden a la caché en el moment d'instal·lació
 const STATIC_ASSETS = [
-  '/',
   '/css/leaflet/leaflet.css',
   '/css/leaflet/markercluster.css',
   '/js/leaflet/leaflet.js',
@@ -60,6 +59,23 @@ self.addEventListener('fetch', (event) => {
   // ─ Si funciona, guardem una còpia a la caché (sobrescriu l'anterior).
   // ─ Si no hi ha xarxa, retornem l'últim estat conegut de la caché.
   if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone()
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
+          return response
+        })
+        .catch(() => caches.match(request))
+    )
+    return
+  }
+
+  // Estratègia pàgines HTML: Network-first amb fallback a caché
+  // ─ Sempre intentem obtenir la pàgina més recent del servidor per evitar
+  //   que es serveixi HTML obsolet amb referències a assets hasheados que ja no existeixen.
+  // ─ Si no hi ha xarxa, retornem la versió emmagatzemada (offline).
+  if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => {
