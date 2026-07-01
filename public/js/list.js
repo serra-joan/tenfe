@@ -140,18 +140,18 @@ function renderTrains(trains, incidents) {
                 onclick="copyTrainUrl('${train.id}')"
                 title="Clic per copiar link del tren">
                 <td class="py-1.5 md:py-2 px-1.5 md:px-2">
-                    <div class="flex items-center gap-1 md:gap-1.5">
+                    <div class="flex items-center gap-2 md:gap-1.5">
                         <img src="${image}" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="${line}" />
                         <span class="font-bold">${line}</span>
                     </div>
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
                     ${train.vehicle.end_station || 'N/A'}
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
                     ${train.vehicle.stopName || 'N/A'}
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
                     ${train.vehicle.next_stop || '-'}
                 </td>
                 <td class="py-1.5 md:py-2 px-1.5 md:px-2 text-center">

@@ -3,14 +3,14 @@ import Layout from '@/layouts/Layout.astro';
 ---
 
 <Layout>
-	<div class="mb-2 flex items-center justify-between">
-		<div>
-			<h1 class="font-bold text-4xl">Tenfe - R1, RG1, R11</h1>
-			<h2 class="text-xl">Trens en temps real de la línea R1 (s'actualitza en <span id="refreshTime">30</span>s)</h2>
+	<div class="mb-2 flex items-center justify-between gap-2">
+		<div class="min-w-0">
+			<h1 class="font-bold text-2xl md:text-4xl">Tenfe</h1>
+			<h2 class="text-sm md:text-xl text-gray-400">Act. en <span id="refreshTime">30</span>s</h2>
 		</div>
-		<a id="link-to-list" href="/list" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors">
-			<img src="/icons/list.svg" class="w-5 h-5 invert" alt="" />
-			<span>Llista</span>
+		<a id="link-to-list" href="/list" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors flex-none">
+			<img src="/icons/list.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" />
+			<span class="text-sm md:text-base">Llista</span>
 		</a>
 	</div>
 
