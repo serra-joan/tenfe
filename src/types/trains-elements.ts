@@ -27,6 +27,7 @@ type Vehicle = {
   stops?: { id: string; name: string; arrival_time: string; departure_time: string; latlon?: StopLatLon }[]
   start_station?: string
   end_station?: string
+  next_stop?: string
   delay: number
   currentStatus: string
 }
