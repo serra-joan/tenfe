@@ -1,0 +1,154 @@
+---
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="Retards · Tenfe">
+  <div class="mb-4">
+    <a href="/" class="text-blue-400 hover:text-blue-300 text-sm">← Tornar al mapa</a>
+    <h1 class="font-bold text-3xl mt-1">Retards per hora</h1>
+    <p class="text-gray-400 text-sm mt-0.5">Mitjana acumulada de retard per franja horària del dia</p>
+  </div>
+
+  <div class="flex-1 min-h-0 flex flex-col gap-4 overflow-y-auto pb-2">
+    <!-- Peak summary cards -->
+    <div id="summary" style="display:none" class="grid grid-cols-2 gap-3">
+      <div class="bg-gray-900 rounded-xl p-4">
+        <p class="text-gray-400 text-xs mb-1">R1 · Hora punta</p>
+        <p id="r1-peak" class="text-2xl font-bold text-red-400">—</p>
+      </div>
+      <div class="bg-gray-900 rounded-xl p-4">
+        <p class="text-gray-400 text-xs mb-1">R11 · Hora punta</p>
+        <p id="r11-peak" class="text-2xl font-bold text-orange-400">—</p>
+      </div>
+    </div>
+
+    <!-- Chart container -->
+    <div class="bg-gray-900 rounded-xl p-4 flex-1 min-h-[300px] relative">
+      <p id="loading-msg" class="absolute inset-0 flex items-center justify-center text-gray-400">
+        Carregant dades...
+      </p>
+      <p id="no-data-msg" style="display:none" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 text-center gap-1">
+        Encara no hi ha dades de retards.
+        <span class="text-sm text-gray-500">S'acumulen automàticament mentre el mapa és actiu.</span>
+      </p>
+      <canvas id="chart-delays" style="display:none"></canvas>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import {
+    Chart,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
+  } from 'chart.js'
+
+  Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
+
+  const HOURS = Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, '0')}h`)
+
+  type DelayStats = { hour: number; avgDelay: number; n: number }
+
+  async function init() {
+    const loadingMsg = document.getElementById('loading-msg')!
+    const noDataMsg = document.getElementById('no-data-msg')!
+    const canvas = document.getElementById('chart-delays') as HTMLCanvasElement
+    const summary = document.getElementById('summary')!
+
+    try {
+      const res = await fetch('/api/delays.json')
+      if (!res.ok) throw new Error('API error')
+
+      const data = await res.json() as { R1: DelayStats[]; R11: DelayStats[] }
+      const hasData = data.R1.some(d => d.n > 0) || data.R11.some(d => d.n > 0)
+
+      loadingMsg.style.display = 'none'
+
+      if (!hasData) {
+        noDataMsg.style.display = 'flex'
+        return
+      }
+
+      // Summary cards
+      summary.style.display = 'grid'
+      document.getElementById('r1-peak')!.textContent = peakLabel(data.R1)
+      document.getElementById('r11-peak')!.textContent = peakLabel(data.R11)
+
+      // Chart
+      canvas.style.display = 'block'
+
+      new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels: HOURS,
+          datasets: [
+            {
+              label: 'R1',
+              data: data.R1.map(d => d.n > 0 ? +(d.avgDelay / 60).toFixed(1) : null),
+              backgroundColor: 'rgba(220, 38, 38, 0.7)',
+              borderColor: 'rgba(220, 38, 38, 1)',
+              borderWidth: 1,
+              borderRadius: 4
+            },
+            {
+              label: 'R11',
+              data: data.R11.map(d => d.n > 0 ? +(d.avgDelay / 60).toFixed(1) : null),
+              backgroundColor: 'rgba(234, 88, 12, 0.7)',
+              borderColor: 'rgba(234, 88, 12, 1)',
+              borderWidth: 1,
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: '#d1d5db' }
+            },
+            tooltip: {
+              callbacks: {
+                label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y} min de mitjana`
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#9ca3af' },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: '#9ca3af',
+                callback: v => `${v} min`
+              },
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              title: {
+                display: true,
+                text: 'Retard mitjà (minuts)',
+                color: '#9ca3af'
+              }
+            }
+          }
+        }
+      })
+    } catch {
+      loadingMsg.style.display = 'none'
+      noDataMsg.style.display = 'flex'
+    }
+  }
+
+  function peakLabel(stats: DelayStats[]): string {
+    const withData = stats.filter(d => d.n > 0)
+    if (withData.length === 0) return '—'
+    const peak = withData.reduce((max, d) => d.avgDelay > max.avgDelay ? d : max, withData[0])
+    return `${String(peak.hour).padStart(2, '0')}:00 · ${(peak.avgDelay / 60).toFixed(1)} min`
+  }
+
+  init()
+</script>

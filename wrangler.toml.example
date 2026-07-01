@@ -1,3 +1,8 @@
 name = "tenfe"
 compatibility_date = "2025-06-30"
 pages_build_output_dir = "./dist"
+
+[[kv_namespaces]]
+binding = "DELAYS_KV"
+id = "string"
+preview_id = "string"

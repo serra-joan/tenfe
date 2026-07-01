@@ -1,5 +1,6 @@
-export const prerender = false;
+export const prerender = false
 
+import type { APIContext } from 'astro'
 import { getTripUpdates } from '@/scripts/get-trip-updates'
 import stationsJSON from '@public/files/output/estacions.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
@@ -32,7 +33,7 @@ const BASE_HEADERS = {
     'Permissions-Policy': 'interest-cohort=()'
 }
 
-export async function GET({ request }: { request: Request }) {
+export async function GET(context: APIContext) {
     let trainsFiltered: TrainElement[] = []
 
     try {
@@ -121,9 +122,17 @@ export async function GET({ request }: { request: Request }) {
                 return false
             })
 
+            // Record delays to KV (background, non-blocking)
+            const runtime = context.locals.runtime
+            if (runtime?.env?.DELAYS_KV) {
+                runtime.ctx.waitUntil(
+                    recordDelays(runtime.env.DELAYS_KV, trainsFiltered).catch(console.error)
+                )
+            }
+
             // Return filtered data
             return new Response(
-                JSON.stringify(trainsFiltered), 
+                JSON.stringify(trainsFiltered),
                 {
                     status: 200,
                     headers: {
@@ -160,4 +169,44 @@ function formatStringTimeToHHMM(timeStr: string): string {
     if (!timeStr) return 'N/A'
     const [hours, minutes] = timeStr.split(':')
     return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`
+}
+
+// ── Delay recording ──────────────────────────────────────────────────────────
+
+const DEBOUNCE_MS = 10 * 60 * 1000 // 10 minutes between KV writes per line
+
+async function recordDelays(kv: KVNamespace, trains: TrainElement[]) {
+    const now = Date.now()
+    const hour = new Date().getHours()
+
+    const delaysByLine: Record<'R1' | 'R11', number[]> = { R1: [], R11: [] }
+
+    for (const train of trains) {
+        if (typeof train.vehicle.delay === 'number') {
+            const line = train.id.includes('R11-') ? 'R11' : 'R1'
+            delaysByLine[line].push(train.vehicle.delay)
+        }
+    }
+
+    for (const line of ['R1', 'R11'] as const) {
+        const delays = delaysByLine[line]
+        if (delays.length === 0) continue
+
+        const key = `delays:${line}`
+        const existing: DelayData = (await kv.get<DelayData>(key, 'json')) ?? {
+            hours: Array.from({ length: 24 }, () => ({ n: 0, sum: 0 })),
+            lastUpdated: 0
+        }
+
+        if (now - existing.lastUpdated < DEBOUNCE_MS) continue
+
+        const avgDelay = delays.reduce((a, b) => a + b, 0) / delays.length
+        existing.hours[hour] = {
+            n: existing.hours[hour].n + 1,
+            sum: existing.hours[hour].sum + avgDelay
+        }
+        existing.lastUpdated = now
+
+        await kv.put(key, JSON.stringify(existing))
+    }
 }

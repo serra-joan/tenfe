@@ -1,6 +1,12 @@
 ---
 import '@/styles/global.css'
 import { version } from '../../package.json'
+
+interface Props {
+  title?: string
+}
+
+const { title = 'tenfe - map' } = Astro.props
 ---
 
 <!doctype html>
@@ -8,7 +14,7 @@ import { version } from '../../package.json'
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tenfe - map</title>
+    <title>{title}</title>
 
 	<!-- PWA -->
 	<link rel="manifest" href="/manifest.json" />
