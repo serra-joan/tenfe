@@ -4,30 +4,30 @@ import Layout from '@/layouts/Layout.astro';
 
 <Layout>
 	<div class="flex-1 flex flex-col min-h-0">
-		<div class="mb-2 flex items-center justify-between">
-			<div>
-				<h1 class="font-bold text-4xl">Tenfe - R1, RG1, R11</h1>
-				<h2 class="text-xl">Vista de llista (s'actualitza en <span id="refreshTime">30</span>s)</h2>
+		<div class="mb-2 flex items-center justify-between gap-2">
+			<div class="min-w-0">
+				<h1 class="font-bold text-xl md:text-4xl truncate">Tenfe</h1>
+				<h2 class="text-sm md:text-xl text-gray-400">Act. en <span id="refreshTime">30</span>s</h2>
 			</div>
-			<a id="link-to-map" href="/" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors">
-				<img src="/icons/map.svg" class="w-5 h-5 invert" alt="" />
-				<span>Mapa</span>
+			<a id="link-to-map" href="/" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors flex-none">
+				<img src="/icons/map.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" />
+				<span class="text-sm md:text-base">Mapa</span>
 			</a>
 		</div>
 
 		<p id="txtErrorMessage" class="hidden text-red-400">Alguna cosa ha anat malament. Torna-ho a intentar més tard.</p>
 
-		<div class="flex flex-wrap justify-center gap-2 mb-4">
-			<button id="filter-R1" onclick="toggleLine('R1')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
-				<img src="/images/lines/r1.webp" class="w-5 h-5 rounded" alt="" />
+		<div class="flex flex-wrap justify-center gap-1.5 md:gap-2 mb-3 md:mb-4">
+			<button id="filter-R1" onclick="toggleLine('R1')" class="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+				<img src="/images/lines/r1.webp" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="" />
 				R1
 			</button>
-			<button id="filter-R11" onclick="toggleLine('R11')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
-				<img src="/images/lines/r11.webp" class="w-5 h-5 rounded" alt="" />
+			<button id="filter-R11" onclick="toggleLine('R11')" class="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+				<img src="/images/lines/r11.webp" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="" />
 				R11
 			</button>
-			<button id="filter-RG1" onclick="toggleLine('RG1')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
-				<img src="/images/lines/rg1.webp" class="w-5 h-5 rounded" alt="" />
+			<button id="filter-RG1" onclick="toggleLine('RG1')" class="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-bold border-2 border-white bg-gray-900/90 backdrop-blur-sm text-white shadow-lg transition-all cursor-pointer">
+				<img src="/images/lines/rg1.webp" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="" />
 				RG1
 			</button>
 		</div>
@@ -41,15 +41,15 @@ import Layout from '@/layouts/Layout.astro';
 		</div>
 
 		<div id="train-list" class="flex-1 min-h-0 overflow-auto">
-			<table class="w-full text-sm">
+			<table class="w-full text-xs md:text-sm">
 				<thead class="sticky top-0 bg-gray-950">
 					<tr class="border-b border-gray-700 text-gray-400">
-						<th class="text-left py-2 px-2">Línia</th>
-						<th class="text-left py-2 px-2">Destí</th>
-						<th class="text-left py-2 px-2">Últ. parada</th>
-						<th class="text-left py-2 px-2">Seg. parada</th>
-						<th class="text-center py-2 px-2">Retard</th>
-						<th class="text-left py-2 px-2">Estat</th>
+						<th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Línia</th>
+						<th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Destí</th>
+						<th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Últ. parada</th>
+						<th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Seg. parada</th>
+						<th class="text-center py-1.5 md:py-2 px-1.5 md:px-2">Retard</th>
+						<th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Estat</th>
 					</tr>
 				</thead>
 				<tbody id="train-list-body">

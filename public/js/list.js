@@ -139,38 +139,38 @@ function renderTrains(trains, incidents) {
             <tr class="border-b border-gray-800 hover:bg-gray-800/50 transition-colors cursor-pointer ${isFocused ? 'bg-yellow-600/70' : ''}"
                 onclick="copyTrainUrl('${train.id}')"
                 title="Clic per copiar link del tren">
-                <td class="py-2 px-2">
-                    <div class="flex items-center gap-1.5">
-                        <img src="${image}" class="w-5 h-5 rounded" alt="${line}" />
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                    <div class="flex items-center gap-1 md:gap-1.5">
+                        <img src="${image}" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="${line}" />
                         <span class="font-bold">${line}</span>
                     </div>
                 </td>
-                <td class="py-2 px-2">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
                     ${train.vehicle.end_station || 'N/A'}
                 </td>
-                <td class="py-2 px-2">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
                     ${train.vehicle.stopName || 'N/A'}
                 </td>
-                <td class="py-2 px-2">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2 truncate max-w-[100px] md:max-w-none">
                     ${train.vehicle.next_stop || '-'}
                 </td>
-                <td class="py-2 px-2 text-center">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2 text-center">
                     ${hasDelay ? `
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-900/50 text-red-400 text-xs font-medium">
-                            <img src="/icons/clock.svg" class="w-3 h-3" alt="" />
+                        <span class="inline-flex items-center justify-center gap-0.5 px-1.5 md:px-2 py-0.5 rounded-full bg-red-900/50 text-red-400 text-[10px] md:text-xs font-medium whitespace-nowrap">
+                            <img src="/icons/clock.svg" class="w-2.5 h-2.5 md:w-3 md:h-3" alt="" />
                             ${delayMinutes}min
                         </span>
                     ` : `
                         <span class="text-gray-500">-</span>
                     `}
                 </td>
-                <td class="py-2 px-2">
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs ${status === 'En marxa' ? 'text-green-400' : 'text-gray-400'}">
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                    <div class="flex items-center gap-1 md:gap-2">
+                        <span class="text-[10px] md:text-xs ${status === 'En marxa' ? 'text-green-400' : 'text-gray-400'}">
                             ${status}
                         </span>
                         ${hasIncidents ? `
-                            <img src="/icons/alert.svg" class="w-4 h-4" title="${trainIncidents.map(i => i.description).join(', ')}" alt="Incidència" />
+                            <img src="/icons/alert.svg" class="w-3 h-3 md:w-4 md:h-4" title="${trainIncidents.map(i => i.description).join(', ')}" alt="Incidència" />
                         ` : ''}
                     </div>
                 </td>
