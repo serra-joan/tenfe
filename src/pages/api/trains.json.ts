@@ -105,6 +105,12 @@ export async function GET({ request }: { request: Request }) {
 
                             e.vehicle.start_station = firstStation || 'Unknown'
                             e.vehicle.end_station = lastStation || 'Unknown'
+
+                            // Add next stop info
+                            if (currentStopIndex !== -1 && currentStopIndex < tripStopTimes.length - 1) {
+                                const nextStop = tripStopTimes[currentStopIndex + 1]
+                                e.vehicle.next_stop = getStationNameById(nextStop.stop_id)
+                            }
                         }
 
                         // Add delay info from trip updates
