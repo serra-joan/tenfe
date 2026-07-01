@@ -139,22 +139,22 @@ function renderTrains(trains, incidents) {
             <tr class="border-b border-gray-800 hover:bg-gray-800/50 transition-colors cursor-pointer ${isFocused ? 'bg-yellow-600/70' : ''}"
                 onclick="copyTrainUrl('${train.id}')"
                 title="Clic per copiar link del tren">
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                <td class="py-1.5 md:py-2 px-4 md:px-2">
                     <div class="flex items-center gap-2 md:gap-1.5">
                         <img src="${image}" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="${line}" />
                         <span class="font-bold">${line}</span>
                     </div>
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                <td class="py-1.5 md:py-2 px-3 md:px-2">
                     ${train.vehicle.end_station || 'N/A'}
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                <td class="py-1.5 md:py-2 px-3 md:px-2">
                     ${train.vehicle.stopName || 'N/A'}
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2">
+                <td class="py-1.5 md:py-2 px-3 md:px-2">
                     ${train.vehicle.next_stop || '-'}
                 </td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2 text-center">
+                <td class="py-1.5 md:py-2 px-3 md:px-2 text-center">
                     ${hasDelay ? `
                         <span class="inline-flex items-center justify-center gap-0.5 px-1.5 md:px-2 py-0.5 rounded-full bg-red-900/50 text-red-400 text-[10px] md:text-xs font-medium whitespace-nowrap">
                             <img src="/icons/clock.svg" class="w-2.5 h-2.5 md:w-3 md:h-3" alt="" />
