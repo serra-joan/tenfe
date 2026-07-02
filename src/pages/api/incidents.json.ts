@@ -1,6 +1,7 @@
 export const prerender = false;
 
 const TARGET = 'https://gtfsrt.renfe.com/alerts.json'
+const DESIRED_ROUTES = ['R1', 'RG1', 'R11']
 const BASE_HEADERS = {
     'Content-Type': 'application/json',
     'X-Content-Type-Options': 'nosniff',
@@ -23,14 +24,13 @@ export async function GET () {
             data.entity.map((e: IncidentRawElement) => {
                 const informedEntity = e.alert?.informedEntity || []
 
-                // Check if the alert is related to R1 or R11 line (can be routes not from [R1, R11 or RG1], because one incident can affect several routes)
-                // Don't need to check routeId.includes('R11'), becouse if entity.routeId.includes('R1') is true on "R11".
-                if (informedEntity.some((entity: InformedEntity) => entity.routeId && (entity.routeId.includes('R1') || entity.routeId.includes('RG1')) )) {
+                // Check if the alert is related to any of the desired routes (exact match)
+                if (informedEntity.some((entity: InformedEntity) => entity.routeId && DESIRED_ROUTES.includes(entity.routeId))) {
                     const incident: IncidentElement = {}
 
-                    // Get routes
+                    // Get routes (only desired ones)
                     incident.routes = informedEntity.map(routeId => routeId.routeId)
-                                                    .filter((r): r is string => r !== undefined)
+                                                    .filter((r): r is string => r !== undefined && DESIRED_ROUTES.includes(r))
                                         
                     // Get desciption
                     const descriptionText = e.alert.descriptionText.translation || []
