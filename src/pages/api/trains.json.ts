@@ -11,10 +11,11 @@ const stationMap = new Map<string, any[]>(
 )
 const tripsMap: Record<string, Map<string, any>> = {
     R1: new Map((trips as any).R1.map((t: any) => [t.trip_id, t])),
-    R11: new Map((trips as any).R11.map((t: any) => [t.trip_id, t]))
+    R11: new Map((trips as any).R11.map((t: any) => [t.trip_id, t])),
+    RG1: new Map((trips as any).RG1.map((t: any) => [t.trip_id, t]))
 }
-const stopTimesMap: Record<string, Map<string, Stop[]>> = { R1: new Map(), R11: new Map() }
-for (const line of ['R1', 'R11'] as const) {
+const stopTimesMap: Record<string, Map<string, Stop[]>> = { R1: new Map(), R11: new Map(), RG1: new Map() }
+for (const line of ['R1', 'R11', 'RG1'] as const) {
     for (const stop of (stop_times as StopJSON)[line]) {
         const arr = stopTimesMap[line].get(stop.trip_id) ?? []
         arr.push(stop)
@@ -39,15 +40,15 @@ export async function GET({ request }: { request: Request }) {
         const r = await fetch(TARGET)
         const data = await r.json()
 
-        // Only R1
+        // Only R1, R11 and RG1
         if (data.entity && data.entity.length > 0) {
             const tripUpdates = await getTripUpdates()
 
             // Filter and set data
             trainsFiltered = data.entity.filter((e: TrainElement) => {
-                // Filter only R1 and R11 lines
-                if (e.id.includes('R1-') || e.id.includes('R11-')) { 
-                    const line = e.id.includes('R1-') ? 'R1' : 'R11'
+                // Filter only R1, R11 and RG1 lines
+                if (e.id.includes('R1-') || e.id.includes('R11-') || e.id.includes('RG1-')) {
+                    const line = e.id.includes('R11-') ? 'R11' : e.id.includes('RG1-') ? 'RG1' : 'R1'
 
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 

@@ -13,6 +13,7 @@ type Stop = {
 type StopJSON = {
     R1: Stop[]
     R11: Stop[]
+    RG1: Stop[]
 }
 type TripPayload = { 
     tripId: string
