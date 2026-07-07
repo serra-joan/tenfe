@@ -6,8 +6,9 @@ const DESIRED_ROUTES = ['R1', 'RG1', 'R11']
 // Extracts the route suffix from a given routeId string. The API returns identifiers like "51T0094R11", but the route codes are "R1", "R11", "RG1", etc. 
 // The regex captures the pattern <digit><letter><digits> at the end of the string (e.g., "4R11"), and with .slice(1) we get only the route ("R11").
 function getRouteSuffix(routeId: string): string {
-    const match = routeId.match(/.*(\d[A-Z]\d+)$/)
-    return match ? match[1].slice(1) : routeId
+    // Fix: does not get RG1
+    const match = routeId.match(/\d+([A-Z]+\d+)$/)
+    return match ? match[1] : routeId
 }
 
 const BASE_HEADERS = {
@@ -26,7 +27,7 @@ export async function GET () {
         const r = await fetch(TARGET)
         const data = await r.json()
 
-        // Only R1
+        // Only DESIRED_ROUTES
         if (data.entity && data.entity.length > 0) {
             // Filter and set data
             data.entity.map((e: IncidentRawElement) => {
