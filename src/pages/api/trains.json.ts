@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import { getTripUpdates } from '@/scripts/get-trip-updates'
+import { DESIRED_LINES, extractLineFromTrainId, type DesiredLine } from '@/scripts/line-utils'
 import stationsJSON from '@public/files/output/estacions.json' with { type: 'json' }
 import trips from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stop_times from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
@@ -9,13 +10,13 @@ import stop_times from '@public/files/output/stop_times_filtered.json' with { ty
 const stationMap = new Map<string, any[]>(
     (stationsJSON.records as any[]).map(r => [String(r[1]), r])
 )
-const tripsMap: Record<string, Map<string, any>> = {
+const tripsMap: Record<DesiredLine, Map<string, any>> = {
     R1: new Map((trips as any).R1.map((t: any) => [t.trip_id, t])),
     R11: new Map((trips as any).R11.map((t: any) => [t.trip_id, t])),
     RG1: new Map((trips as any).RG1.map((t: any) => [t.trip_id, t]))
 }
-const stopTimesMap: Record<string, Map<string, Stop[]>> = { R1: new Map(), R11: new Map(), RG1: new Map() }
-for (const line of ['R1', 'R11', 'RG1'] as const) {
+const stopTimesMap: Record<DesiredLine, Map<string, Stop[]>> = { R1: new Map(), R11: new Map(), RG1: new Map() }
+for (const line of DESIRED_LINES) {
     for (const stop of (stop_times as StopJSON)[line]) {
         const arr = stopTimesMap[line].get(stop.trip_id) ?? []
         arr.push(stop)
@@ -46,9 +47,9 @@ export async function GET({ request }: { request: Request }) {
 
             // Filter and set data
             trainsFiltered = data.entity.filter((e: TrainElement) => {
-                // Filter only R1, R11 and RG1 lines
-                if (e.id.includes('R1-') || e.id.includes('R11-') || e.id.includes('RG1-')) {
-                    const line = e.id.includes('R11-') ? 'R11' : e.id.includes('RG1-') ? 'RG1' : 'R1'
+                // Resolve line using tripId as source of truth; fallback to train id pattern
+                const line = resolveTrainLine(e)
+                if (line) {
 
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 
@@ -147,6 +148,18 @@ export async function GET({ request }: { request: Request }) {
         return new Response(JSON.stringify({ error: 'Failed to fetch or process data' }), { status: 500, headers: { ...BASE_HEADERS } })
     }
   
+}
+
+function resolveTrainLine(train: TrainElement): DesiredLine | null {
+    const tripId = train.vehicle?.trip?.tripId
+
+    if (tripId) {
+        for (const line of DESIRED_LINES) {
+            if (tripsMap[line].has(tripId)) return line
+        }
+    }
+
+    return extractLineFromTrainId(train.id)
 }
 
 

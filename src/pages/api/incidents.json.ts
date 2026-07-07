@@ -1,15 +1,8 @@
 export const prerender = false;
 
-const TARGET = 'https://gtfsrt.renfe.com/alerts.json'
-const DESIRED_ROUTES = ['R1', 'RG1', 'R11']
+import { DESIRED_LINES, extractLineFromRouteId } from '@/scripts/line-utils'
 
-// Extracts the route suffix from a given routeId string. The API returns identifiers like "51T0094R11", but the route codes are "R1", "R11", "RG1", etc. 
-// The regex captures the pattern <digit><letter><digits> at the end of the string (e.g., "4R11"), and with .slice(1) we get only the route ("R11").
-function getRouteSuffix(routeId: string): string {
-    // Fix: does not get RG1
-    const match = routeId.match(/\d+([A-Z]+\d+)$/)
-    return match ? match[1] : routeId
-}
+const TARGET = 'https://gtfsrt.renfe.com/alerts.json'
 
 const BASE_HEADERS = {
     'Content-Type': 'application/json',
@@ -34,12 +27,12 @@ export async function GET () {
                 const informedEntity = e.alert?.informedEntity || []
 
                 // Check if the alert is related to any of the desired routes (exact match)
-                if (informedEntity.some((entity: InformedEntity) => entity.routeId && DESIRED_ROUTES.includes(getRouteSuffix(entity.routeId)))) {
+                if (informedEntity.some((entity: InformedEntity) => entity.routeId && extractLineFromRouteId(entity.routeId))) {
                     const incident: IncidentElement = {}
 
                     // Get routes (only desired ones)
                     incident.routes = informedEntity.map(routeId => routeId.routeId)
-                                                    .filter((r): r is string => r !== undefined && DESIRED_ROUTES.includes(getRouteSuffix(r)))
+                                                    .filter((r): r is string => r !== undefined && extractLineFromRouteId(r) !== null)
                                         
                     // Get desciption
                     const descriptionText = e.alert.descriptionText.translation || []
