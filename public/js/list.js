@@ -1,6 +1,16 @@
 const REFRESH_TIME = 30
 
+const {
+    getTrainIdFromUrl,
+    getLineFromId,
+    restartRefreshCountdown,
+    toggleLineFilter,
+    setErrorMessage,
+    setLoading
+} = window.CommonFunctions
+
 let countdownInterval = null
+let filteredTrains = null
 const activeLines = new Set(['R1', 'R11', 'RG1'])
 
 const imageR1 = '/images/lines/r1.webp'
@@ -13,30 +23,71 @@ const lineImages = {
     RG1: imageRG1
 }
 
-function getTrainIdFromUrl() {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('trainId') || null
-}
+const modal = document.getElementById('modal-train-timeline')
+const btnModalClose = modal.querySelector('#modal-train-close')
+const btnFollowLink = modal.querySelector('#modal-follow-link')
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadData()
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadData()
     setInterval(loadData, REFRESH_TIME * 1000)
+
+    // Load modal with if it's open in the URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const modalTrainId = urlParams.get('modalTrain')
+    if (modalTrainId) {
+        openModalTimeline(modalTrainId)
+    }
+
+    // Events to close modal
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeModalTimeline()
+        }
+    })
+
+    if (modal) {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal || event.target.classList.contains('z-201')) {
+                closeModalTimeline()
+            }
+        })
+    }
 })
+
+// Events modal
+if (btnModalClose) {
+    btnModalClose.addEventListener('click', () => {
+        closeModalTimeline()
+    })
+}
+if (btnFollowLink) {
+    btnFollowLink.addEventListener('click', () => {
+        const followLink = btnFollowLink.dataset.followlink
+        if (followLink) {
+            // Copy to clipboard
+            navigator.clipboard.writeText(followLink).then(() => {            
+                const label = btnFollowLink.querySelector('span')
+                
+                // Revert text after 4 seconds
+                if (label) {
+                    label.textContent = 'Link copiat!'
+                    label.classList.add('text-green-400')
+
+                    setTimeout(() => {
+                        label.textContent = 'Compartir tren'
+                        label.classList.remove('text-green-400')
+                    }, 4000)
+                }
+            })
+        }
+    })
+}
 
 async function loadData() {
     setLoading(true)
     setErrorMessage('', true)
 
-    const refreshTimeEl = document.getElementById('refreshTime')
-    if (refreshTimeEl) {
-        let timeLeft = REFRESH_TIME
-        if (countdownInterval) clearInterval(countdownInterval)
-        countdownInterval = setInterval(() => {
-            timeLeft--
-            refreshTimeEl.textContent = timeLeft
-            if (timeLeft <= 0) clearInterval(countdownInterval)
-        }, 1000)
-    }
+    countdownInterval = restartRefreshCountdown(REFRESH_TIME, countdownInterval)
 
     try {
         const [incidents, trains] = await Promise.all([
@@ -54,32 +105,11 @@ async function loadData() {
     setLoading(false)
 }
 
-function getLineFromId(id) {
-    if (!id) return null
-    if (id.includes('RG1-')) return 'RG1'
-    if (id.includes('R11-')) return 'R11'
-    if (id.includes('R1-')) return 'R1'
-    return null
-}
-
 function toggleLine(line) {
-    if (activeLines.has(line)) activeLines.delete(line)
-    else activeLines.add(line)
-
-    const btn = document.getElementById(`filter-${line}`)
-    if (btn) btn.classList.toggle('line-filter-inactive', !activeLines.has(line))
-
+    toggleLineFilter(activeLines, line)
     loadData()
 }
 window.toggleLine = toggleLine
-
-function copyTrainUrl(trainId) {
-    const url = new URL(window.location.href)
-    url.searchParams.set('trainId', trainId)
-    navigator.clipboard.writeText(url.toString()).then(() => {
-        showToast('Link copiat per seguir el tren!')
-    })
-}
 
 function showToast(message) {
     let toast = document.getElementById('toast')
@@ -102,10 +132,18 @@ function renderTrains(trains, incidents) {
 
     const trainIdToFocus = getTrainIdFromUrl()
 
-    const filteredTrains = trains.filter(train => {
+    filteredTrains = trains.filter(train => {
         const line = getLineFromId(train.id)
         return line && activeLines.has(line)
     })
+
+    if (trainIdToFocus) {
+        filteredTrains.sort((a, b) => {
+            if (a.id === trainIdToFocus) return -1
+            if (b.id === trainIdToFocus) return 1
+            return 0
+        })
+    }
 
     if (filteredTrains.length === 0) {
         tbody.innerHTML = `
@@ -137,7 +175,7 @@ function renderTrains(trains, incidents) {
 
         return `
             <tr class="border-b border-gray-800 hover:bg-gray-800/50 transition-colors cursor-pointer ${isFocused ? 'bg-yellow-600/70' : ''}"
-                onclick="copyTrainUrl('${train.id}')"
+                onclick="openModalTimeline('${train.id}')"
                 title="Clic per copiar link del tren">
                 <td class="py-1.5 md:py-2 px-4 md:px-2">
                     <div class="flex items-center gap-2 md:gap-1.5">
@@ -200,19 +238,153 @@ function renderIncidents(incidents) {
     `).join('')
 }
 
-function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a intentar més tard.", clear = false) {
-    const errorMessage = document.getElementById('txtErrorMessage')
-    if (errorMessage) {
-        errorMessage.textContent = message
-        if (clear) errorMessage.classList.add('hidden')
-        else errorMessage.classList.remove('hidden')
+// Format timestamp to readable date (Madrid timezone, DD-MM-YYYY HH:MM:SS)
+function formatDate(timestamp) {
+    const d = new Date(timestamp * 1000)
+    const opts = {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    }
+    const parts = new Intl.DateTimeFormat('es-ES', opts).formatToParts(d)
+    const p = {}
+    
+    parts.forEach(({ type, value }) => { p[type] = value })
+    return `${p.hour}:${p.minute}:${p.second}`
+}
+
+// Sum delay (in seconds) to time (HH:MM) and return new time (HH:MM)
+function sumDelayToTime(time, delay) {
+    const [hours, minutes] = time.split(':').map(Number)
+    const date = new Date()
+
+    date.setHours(hours)
+    date.setMinutes(minutes + Math.round(delay / 60))
+
+    const delayedHours = String(date.getHours()).padStart(2, '0')
+    const delayedMinutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${delayedHours}:${delayedMinutes}`
+}
+
+// MODAL
+function openModalTimeline(trainId) {
+    if (!modal) return
+    
+    // Config modal
+    const train = filteredTrains.find(t => t.id === trainId)
+    if (!train) return
+
+    // image
+    const line = getLineFromId(trainId)
+    const image = lineImages[line] || '/images/lines/rodalies.webp'
+    const lineImageEl = document.getElementById('modal-train-line-image')
+    if (lineImageEl) lineImageEl.src = image
+
+    // title
+    const titleEl = document.getElementById('modal-train-title')
+    if (titleEl) titleEl.textContent = `${train.vehicle.end_station || 'N/A'}`
+
+    // subtitle and more info
+    const subtitleEl = document.getElementById('modal-train-subtitle')
+    const delayEl = document.getElementById('modal-train-delay')
+    const trinIdEl = document.getElementById('modal-train-id')
+    if (delayEl) {
+        if (train.vehicle.delay && train.vehicle.delay > 0) {
+            const delayMinutes = Math.round(train.vehicle.delay / 60)
+            delayEl.innerHTML = `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-red-900/50 text-red-400 text-xs font-medium">
+            <img src="/icons/clock.svg" class="w-3 h-3" alt="" />
+            ${delayMinutes}min de retard</span>`
+        }
+    }
+    if (trinIdEl) trinIdEl.textContent = `ID: ${train.id}`
+    if (subtitleEl) subtitleEl.textContent = `Últ. act.: ${formatDate(train.vehicle.timestamp)}`
+
+    // follow link
+    const followLinkEl = document.getElementById('modal-follow-link')
+    if (followLinkEl) {
+        const url = new URL(window.location.href)
+        url.searchParams.set('trainId', trainId)
+        url.searchParams.set('modalTrain', trainId)
+        followLinkEl.dataset.followlink = url.toString()
+    }
+
+    // render timeline
+    renderTimeline(trainId)
+
+    // change the url to open de modal with the next reload
+    const url = new URL(window.location.href)
+    url.searchParams.set('modalTrain', trainId)
+    window.history.replaceState({}, '', url.toString())
+
+    modal.classList.remove('hidden')
+    requestAnimationFrame(() => scrollTimelineToCurrent(trainId))
+}
+
+function renderTimeline(trainId) {
+    const train = filteredTrains.find(t => t.id === trainId)
+    const stopsListEl = document.getElementById('modal-train-timeline-content')
+    
+    if (train?.stops) {
+        const delay = train.vehicle.delay // seconds
+        const status = train.vehicle.currentStatus
+        let stopsList = `<ol class="relative">
+        <div class="absolute left-14 top-0 bottom-0 w-0.5 bg-gray-600"></div>`
+
+        train.stops.forEach(stop => {
+            const isCurrent = stop.id == train.vehicle.stopId
+            let delayArrivalTime = null
+
+            if (delay && delay > 0) {
+                // Sum delay to original arrival time
+                delayArrivalTime = sumDelayToTime(stop.arrival_time, delay)
+            }
+
+            // `id="current-stop-${train.id}"` is used to scroll into view when popup opens
+            stopsList += `
+                <li ${isCurrent ? `id="current-stop-${train.id}"` : ''} class="flex items-start text-sm px-2 py-2 ${isCurrent ? 'font-bold bg-yellow-600/70 rounded-md py-1' : ''}" data-latlon="${stop.latlon ? `${stop.latlon.lat},${stop.latlon.lon}` : ''}">
+                    <div class=" flex-col w-6 text-right select-none">
+                        <span class="${delayArrivalTime ? 'line-through' : ''}">${stop.arrival_time}</span>
+                        ${delayArrivalTime ? `<span class="text-red-400">${delayArrivalTime}</span>` : ''}
+                    </div>
+                    <div class="relative w-4.5 ms-4 flex items-start justify-center">
+                        <div class="w-3 h-3 bg-gray-200 rounded-full border border-gray-500 z-10 mt-1 ${status === 'INCOMING_AT' && isCurrent ? 'animate-moving-down' : ''}"></div>
+                    </div>
+                    <span class="ms-2">${stop.name}</span>
+                </li>
+            `
+        })
+       
+        if (stopsListEl) {
+            stopsListEl.innerHTML = stopsList + '</ol>'
+        }
+
+    } else {
+        if (stopsListEl) stopsListEl.innerHTML = `<p>No hi ha informació de parades disponible.</p>`
     }
 }
 
-function setLoading(isLoading) {
-    const loadingEl = document.getElementById('loading')
-    if (loadingEl) {
-        if (isLoading) loadingEl.classList.remove('hidden')
-        else loadingEl.classList.add('hidden')
-    }
+function scrollTimelineToCurrent(trainId) {
+    const stopsListEl = document.getElementById('modal-train-timeline-content')
+    if (!stopsListEl) return
+
+    const current = stopsListEl.querySelector(`#current-stop-${trainId}`)
+    if (!current) return
+
+    current.scrollIntoView({ block: 'start', inline: 'nearest' })
+}
+
+function closeModalTimeline() {
+    if (!modal) return
+    modal.classList.add('hidden')
+
+    // Clean the URL to remove the modalTrain param
+    const url = new URL(window.location.href)
+    url.searchParams.delete('modalTrain')
+    window.history.replaceState({}, '', url.toString())
 }
