@@ -37,8 +37,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (modalTrainId) {
         openModalTimeline(modalTrainId)
     }
+
+    // Events to close modal
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeModalTimeline()
+        }
+    })
+
+    if (modal) {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal || event.target.classList.contains('z-201')) {
+                closeModalTimeline()
+            }
+        })
+    }
 })
 
+// Events modal
 if (btnModalClose) {
     btnModalClose.addEventListener('click', () => {
         closeModalTimeline()
