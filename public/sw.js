@@ -1,14 +1,13 @@
 // Canviar la versió força que el SW s'actualitzi i buida la caché antiga
-const CACHE_NAME = 'tenfe-v2'
+const CACHE_NAME = 'tenfe-v3'
 
-// Recursos estàtics que es descarreguen i es guarden a la caché en el moment d'instal·lació
-const STATIC_ASSETS = [
+// Llibreries de tercers "vendored": no porten hash a la URL però tampoc canvien
+// entre desplegaments, així que és segur servir-les cache-first.
+const VENDOR_ASSETS = [
   '/css/leaflet/leaflet.css',
   '/css/leaflet/markercluster.css',
   '/js/leaflet/leaflet.js',
   '/js/leaflet/markercluster.js',
-  '/js/main.js',
-  '/images/logos/tenfe_192.png',
 ]
 
 // INSTALL ─────────────────────────────────────────────────────────────────────
@@ -17,7 +16,7 @@ const STATIC_ASSETS = [
 // evitant que s'activi abans que tots els recursos estàtics estiguin a la caché.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(VENDOR_ASSETS))
   )
   // skipWaiting() fa que el SW nou prengui el control immediatament,
   // sense esperar que es tanquin les pestanyes que usen el SW antic.
@@ -54,51 +53,35 @@ self.addEventListener('fetch', (event) => {
   // (p. ex. tiles d'OpenStreetMap, que gestiona Leaflet pel seu compte)
   if (request.method !== 'GET' || url.origin !== self.location.origin) return
 
-  // Estratègia API: Network-first amb fallback a caché
-  // ─ Intentem la xarxa per obtenir les dades més recents.
-  // ─ Si funciona, guardem una còpia a la caché (sobrescriu l'anterior).
-  // ─ Si no hi ha xarxa, retornem l'últim estat conegut de la caché.
-  if (url.pathname.startsWith('/api/')) {
+  // Estratègia llibreries vendored: Cache-first
+  // ─ No canvien entre desplegaments, així que prioritzem velocitat i offline.
+  if (VENDOR_ASSETS.includes(url.pathname)) {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
+      caches.match(request).then((cached) => {
+        if (cached) return cached
+        return fetch(request).then((response) => {
           const copy = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
           return response
         })
-        .catch(() => caches.match(request))
+      })
     )
     return
   }
 
-  // Estratègia pàgines HTML: Network-first amb fallback a caché
-  // ─ Sempre intentem obtenir la pàgina més recent del servidor per evitar
-  //   que es serveixi HTML obsolet amb referències a assets hasheados que ja no existeixen.
-  // ─ Si no hi ha xarxa, retornem la versió emmagatzemada (offline).
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone()
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
-          return response
-        })
-        .catch(() => caches.match(request))
-    )
-    return
-  }
-
-  // Estratègia recursos estàtics: Cache-first amb fallback a xarxa
-  // ─ Si el recurs ja és a la caché (posat allà durant l'install), el servim directament.
-  // ─ Si no hi és (p. ex. un recurs nou), fem la petició i la guardem per a la propera vegada.
+  // Estratègia per a tota la resta (pàgines, API, JS/CSS/imatges propis): Network-first
+  // amb fallback a caché.
+  // ─ Aquests recursos no porten hash a la URL, així que si féssim cache-first
+  //   no es refrescarien mai després d'un desplegament.
+  // ─ Intentem sempre la xarxa primer per servir l'última versió; si no hi ha
+  //   xarxa, retornem l'últim estat conegut de la caché (offline).
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached
-      return fetch(request).then((response) => {
+    fetch(request)
+      .then((response) => {
         const copy = response.clone()
         caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
         return response
       })
-    })
+      .catch(() => caches.match(request))
   )
 })
