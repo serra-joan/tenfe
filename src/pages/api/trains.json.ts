@@ -129,6 +129,13 @@ export async function GET({ request }: { request: Request }) {
                 return false
             })
 
+            // Sort trains by current station name for readability
+            trainsFiltered.sort((a, b) => {
+                const stationA = a.vehicle.end_station || ''
+                const stationB = b.vehicle.end_station || ''
+                return stationA.localeCompare(stationB, 'ca')
+            })
+
             // Return filtered data
             return new Response(
                 JSON.stringify(trainsFiltered), 
