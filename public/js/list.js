@@ -13,6 +13,10 @@ let countdownInterval = null
 let filteredTrains = null
 const activeLines = new Set(['R1', 'R11', 'RG1'])
 
+// Cache last fetched data for re-rendering on filter toggle
+let lastTrains = null
+let lastIncidents = []
+
 const imageR1 = '/images/lines/r1.webp'
 const imageR11 = '/images/lines/r11.webp'
 const imageRG1 = '/images/lines/rg1.webp'
@@ -95,6 +99,9 @@ async function loadData() {
             fetch('/api/trains.json').then(res => res.json())
         ])
 
+        lastTrains = trains
+        lastIncidents = incidents
+
         renderTrains(trains, incidents)
         renderIncidents(incidents)
     } catch (error) {
@@ -107,7 +114,8 @@ async function loadData() {
 
 function toggleLine(line) {
     toggleLineFilter(activeLines, line)
-    loadData()
+
+    if (lastTrains) renderTrains(lastTrains, lastIncidents)
 }
 window.toggleLine = toggleLine
 
