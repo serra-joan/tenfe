@@ -1,0 +1,16 @@
+---
+interface Props {
+    id?: string
+    label: string
+}
+
+const { id, label } = Astro.props
+---
+
+<button
+    id={id}
+    class="flex items-center gap-2 uppercase cursor-pointer px-4 py-2 rounded-xl border border-gray-600 hover:bg-gray-800 w-max"
+>
+    <slot name="icon" />
+    <span>{label}</span>
+</button>

@@ -1,0 +1,56 @@
+---
+import Button from '@/components/Button.astro';
+---
+<div id="modal-train-timeline" class="hidden fixed inset-0 z-1200">
+	<div id="modal-train-backdrop" class="absolute inset-0 bg-black/75 backdrop-blur-[1px]"></div>
+
+	<div class="relative z-1201 h-full w-full flex items-end md:items-center justify-center p-0 md:p-4">
+		<div
+			id="modal-train-panel"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="modal-train-title"
+			class="w-full md:max-w-2xl max-h-[92vh] bg-gray-950 border border-gray-800 rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden"
+		>
+			<div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-gray-800 bg-gray-900/80">
+				<div class="min-w-0 flex items-center gap-3">
+					<img id="modal-train-line-image" src="/images/lines/rodalies.webp" alt="Línia" class="w-8 h-8 rounded-md flex-none" />
+					<div class="min-w-0">
+						<h3 id="modal-train-title" class="text-base md:text-lg font-bold truncate">Timeline del tren</h3>
+						<p id="modal-train-subtitle" class="text-xs md:text-sm text-gray-400 truncate">Detalls en temps real</p>
+					</div>
+				</div>
+
+				<button
+					id="modal-train-close"
+					type="button"
+					aria-label="Tancar modal"
+					class="w-9 h-9 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors text-xl leading-none cursor-pointer"
+				>
+					×
+				</button>
+			</div>
+
+			<div class="p-4 overflow-y-auto max-h-[calc(92vh-64px)]">
+				<div class="mb-4 flex items-start justify-between gap-3">
+					<div class="min-w-0">
+						<p id="modal-train-meta" class="text-xs md:text-sm text-gray-400"></p>
+						<div id="modal-train-delay" class="mt-1"></div>
+					</div>
+
+                    <Button id="modal-follow-link" label="Compartir tren" data-followlink="/">
+                        <img slot="icon" src="/icons/share.svg" class="w-5 h-5 invert rounded-md" alt="" />
+                    </Button>
+				</div>
+
+				<h4 class="font-semibold">Parades</h4>
+				<div id="modal-train-timeline-content" class="mt-1 max-h-120 overflow-y-auto w-full"></div>
+
+				<div id="modal-train-incidents-wrapper" class="mt-4 hidden">
+					<h4 class="font-semibold">Incidències</h4>
+					<div id="modal-train-incidents" class="max-h-48 overflow-y-auto space-y-2 mt-2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
