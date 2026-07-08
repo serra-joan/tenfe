@@ -264,10 +264,21 @@ function openModalTimeline(trainId) {
 
     // title
     const titleEl = document.getElementById('modal-train-title')
-    if (titleEl) titleEl.textContent = `${trainId}`
+    if (titleEl) titleEl.textContent = `${train.vehicle.end_station || 'N/A'}`
 
-    // subtitle
+    // subtitle and more info
     const subtitleEl = document.getElementById('modal-train-subtitle')
+    const delayEl = document.getElementById('modal-train-delay')
+    const trinIdEl = document.getElementById('modal-train-id')
+    if (delayEl) {
+        if (train.vehicle.delay && train.vehicle.delay > 0) {
+            const delayMinutes = Math.round(train.vehicle.delay / 60)
+            delayEl.innerHTML = `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-red-900/50 text-red-400 text-xs font-medium">
+            <img src="/icons/clock.svg" class="w-3 h-3" alt="" />
+            ${delayMinutes}min de retard</span>`
+        }
+    }
+    if (trinIdEl) trinIdEl.textContent = `ID: ${train.id}`
     if (subtitleEl) subtitleEl.textContent = `Últ. act.: ${formatDate(train.vehicle.timestamp)}`
 
     // follow link
