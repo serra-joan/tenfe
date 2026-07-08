@@ -43,9 +43,10 @@ import { version } from '../../package.json'
     <main class=" flex flex-col w-full h-screen p-2 lg:p-10">
       <slot />
 
-	  <!-- Version -->
-	  <div class="text-xs text-gray-400 mt-2 text-center">
-		Tenfe - v{version}
+	  <!-- Credits & Version -->
+	  <div class="flex flex-wrap justify-between text-xs text-gray-400 mt-2 text-center">
+		<span>Desenvolupat per <a href="https://serrajoan.com" target="_blank" class="underline">Joan Serra</a></span>
+		<span>Tenfe - v{version}</span>
 	  </div>
     </main>
 
