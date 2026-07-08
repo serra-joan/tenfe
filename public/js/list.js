@@ -27,9 +27,16 @@ const modal = document.getElementById('modal-train-timeline')
 const btnModalClose = modal.querySelector('#modal-train-close')
 const btnFollowLink = modal.querySelector('#modal-follow-link')
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadData()
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadData()
     setInterval(loadData, REFRESH_TIME * 1000)
+
+    // Load modal with if it's open in the URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const modalTrainId = urlParams.get('modalTrain')
+    if (modalTrainId) {
+        openModalTimeline(modalTrainId)
+    }
 })
 
 if (btnModalClose) {
@@ -268,11 +275,17 @@ function openModalTimeline(trainId) {
     if (followLinkEl) {
         const url = new URL(window.location.href)
         url.searchParams.set('trainId', trainId)
+        url.searchParams.set('modalTrain', trainId)
         followLinkEl.dataset.followlink = url.toString()
     }
 
     // render timeline
     renderTimeline(trainId)
+
+    // change the url to open de modal with the next reload
+    const url = new URL(window.location.href)
+    url.searchParams.set('modalTrain', trainId)
+    window.history.replaceState({}, '', url.toString())
 
     modal.classList.remove('hidden')
     requestAnimationFrame(() => scrollTimelineToCurrent(trainId))
@@ -334,4 +347,9 @@ function scrollTimelineToCurrent(trainId) {
 function closeModalTimeline() {
     if (!modal) return
     modal.classList.add('hidden')
+
+    // Clean the URL to remove the modalTrain param
+    const url = new URL(window.location.href)
+    url.searchParams.delete('modalTrain')
+    window.history.replaceState({}, '', url.toString())
 }
