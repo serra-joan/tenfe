@@ -1,5 +1,5 @@
 ---
-import Button from '@/components/Button.astro';
+import ButtonTransparent from '@/components/ButtonTransparent.astro';
 ---
 <div id="modal-train-timeline" class="hidden fixed inset-0 z-1200">
 	<div id="modal-train-backdrop" class="absolute inset-0 bg-black/75 backdrop-blur-[1px]"></div>
@@ -38,9 +38,9 @@ import Button from '@/components/Button.astro';
 						<div id="modal-train-delay" class="mt-1"></div>
 					</div>
 
-					<Button id="modal-follow-link" label="Compartir tren" data-followlink="/">
+					<ButtonTransparent id="modal-follow-link" label="Compartir tren" data-followlink="/">
 						<img slot="icon" src="/icons/share.svg" class="w-5 h-5 invert rounded-md" alt="" />
-					</Button>
+					</ButtonTransparent>
 				</div>
 				<h4 class="font-semibold">Parades</h4>
 			</div>
