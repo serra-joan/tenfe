@@ -121,6 +121,14 @@ function renderTrains(trains, incidents) {
         return line && activeLines.has(line)
     })
 
+    if (trainIdToFocus) {
+        filteredTrains.sort((a, b) => {
+            if (a.id === trainIdToFocus) return -1
+            if (b.id === trainIdToFocus) return 1
+            return 0
+        })
+    }
+
     if (filteredTrains.length === 0) {
         tbody.innerHTML = `
             <tr>
