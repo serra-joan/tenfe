@@ -1,5 +1,14 @@
 const REFRESH_TIME = 30
 
+const {
+    getTrainIdFromUrl,
+    getLineFromId,
+    restartRefreshCountdown,
+    toggleLineFilter,
+    setErrorMessage,
+    setLoading
+} = window.CommonFunctions
+
 let countdownInterval = null
 const activeLines = new Set(['R1', 'R11', 'RG1'])
 
@@ -13,11 +22,6 @@ const lineImages = {
     RG1: imageRG1
 }
 
-function getTrainIdFromUrl() {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('trainId') || null
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     loadData()
     setInterval(loadData, REFRESH_TIME * 1000)
@@ -27,16 +31,7 @@ async function loadData() {
     setLoading(true)
     setErrorMessage('', true)
 
-    const refreshTimeEl = document.getElementById('refreshTime')
-    if (refreshTimeEl) {
-        let timeLeft = REFRESH_TIME
-        if (countdownInterval) clearInterval(countdownInterval)
-        countdownInterval = setInterval(() => {
-            timeLeft--
-            refreshTimeEl.textContent = timeLeft
-            if (timeLeft <= 0) clearInterval(countdownInterval)
-        }, 1000)
-    }
+    countdownInterval = restartRefreshCountdown(REFRESH_TIME, countdownInterval)
 
     try {
         const [incidents, trains] = await Promise.all([
@@ -54,20 +49,8 @@ async function loadData() {
     setLoading(false)
 }
 
-function getLineFromId(id) {
-    if (!id) return null
-    if (id.includes('RG1-')) return 'RG1'
-    if (id.includes('R11-')) return 'R11'
-    if (id.includes('R1-')) return 'R1'
-    return null
-}
-
 function toggleLine(line) {
-    if (activeLines.has(line)) activeLines.delete(line)
-    else activeLines.add(line)
-
-    const btn = document.getElementById(`filter-${line}`)
-    if (btn) btn.classList.toggle('line-filter-inactive', !activeLines.has(line))
+    toggleLineFilter(activeLines, line)
 
     loadData()
 }
@@ -198,21 +181,4 @@ function renderIncidents(incidents) {
             <span class="text-red-400 text-sm">${incident.description}</span>
         </div>
     `).join('')
-}
-
-function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a intentar més tard.", clear = false) {
-    const errorMessage = document.getElementById('txtErrorMessage')
-    if (errorMessage) {
-        errorMessage.textContent = message
-        if (clear) errorMessage.classList.add('hidden')
-        else errorMessage.classList.remove('hidden')
-    }
-}
-
-function setLoading(isLoading) {
-    const loadingEl = document.getElementById('loading')
-    if (loadingEl) {
-        if (isLoading) loadingEl.classList.remove('hidden')
-        else loadingEl.classList.add('hidden')
-    }
 }

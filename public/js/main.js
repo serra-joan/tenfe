@@ -1,5 +1,14 @@
 const REFRESH_TIME = 30 // seconds
 
+const {
+    getTrainIdFromUrl,
+    getLineFromId,
+    restartRefreshCountdown,
+    toggleLineFilter,
+    setErrorMessage,
+    setLoading
+} = window.CommonFunctions
+
 // Initialize map on initPaintress
 let map
 
@@ -24,7 +33,9 @@ const imageDefault = 'images/lines/rodalies.webp'
 
 // Fetch train data from proxy server
 document.addEventListener('DOMContentLoaded', async () => {
-   // Initialize map and marker cluster
+    if (!document.getElementById('map')) return
+
+    // Initialize map and marker cluster
     map = L.map('map', {
         center: [41.53324928604702, 2.445498794906298],
         zoom: 12,
@@ -52,19 +63,7 @@ async function initPaintress() {
     // Clear error message
     setErrorMessage('', true)
 
-    // Set time left
-    const refreshTimeEl = document.getElementById('refreshTime')
-
-    if (refreshTimeEl) {
-        let timeLeft = REFRESH_TIME
-        if (countdownInterval) clearInterval(countdownInterval)
-        countdownInterval = setInterval(() => {
-            timeLeft--
-            refreshTimeEl.textContent = timeLeft
-
-            if (timeLeft <= 0) clearInterval(countdownInterval)
-        }, 1000)
-    }
+    countdownInterval = restartRefreshCountdown(REFRESH_TIME, countdownInterval)
 
     try {
         const [incidents, data] = await Promise.all([
@@ -79,7 +78,7 @@ async function initPaintress() {
             renderMarkers(data, incidents)
 
             // Show error if focused train not found in data at all
-            const trainIdToFocus = getUrlParameter()
+            const trainIdToFocus = getTrainIdFromUrl()
             if (trainIdToFocus && !data.some(e => e.id === trainIdToFocus)) {
                 setErrorMessage(`No s'ha pogut trobar el tren ${trainIdToFocus}. Si l'ID és correcte, el tren està aturat en l'última parada o no hi ha informació de posició disponible. Quan s'actualitzi, Renfe oferirà la informació i es mostrarà al mapa.`)
             }
@@ -106,22 +105,9 @@ async function getIncidents() {
     }
 }
 
-// Get line name from train ID (check RG1/R11 before R1 to avoid substring match)
-function getLineFromId(id) {
-    if (!id) return null
-    if (id.includes('RG1-')) return 'RG1'
-    if (id.includes('R11-')) return 'R11'
-    if (id.includes('R1-')) return 'R1'
-    return null
-}
-
 // Toggle line visibility and re-render with cached data
 function toggleLine(line) {
-    if (activeLines.has(line)) activeLines.delete(line)
-    else activeLines.add(line)
-
-    const btn = document.getElementById(`filter-${line}`)
-    if (btn) btn.classList.toggle('line-filter-inactive', !activeLines.has(line))
+    toggleLineFilter(activeLines, line)
 
     if (lastData) renderMarkers(lastData, lastIncidents)
 }
@@ -131,7 +117,7 @@ window.toggleLine = toggleLine
 function renderMarkers(data, incidents) {
     markers.clearLayers()
 
-    const trainIdToFocus = getUrlParameter()
+    const trainIdToFocus = getTrainIdFromUrl()
     let trainFocusLocation = []
 
     data.forEach(entity => {
@@ -218,12 +204,6 @@ document.addEventListener('click', (e) => {
             
     }
 })
-
-// Focus on a train by ID
-function getUrlParameter() {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('trainId') || null
-}
 
 // Build custom icon for train marker
 function iconBuilder(id, status, incidentsList, hasDelay, focusOn = false) {
@@ -312,27 +292,6 @@ function sumDelayToTime(time, delay) {
     const delayedMinutes = String(date.getMinutes()).padStart(2, '0')
 
     return `${delayedHours}:${delayedMinutes}`
-}
-
-// Errors message
-function setErrorMessage(message = "Alguna cosa ha anat malament. Torna-ho a intentar més tard.", clear = false) {
-    const errorMessage = document.getElementById('txtErrorMessage')
-                
-    if (errorMessage) {
-        errorMessage.textContent = message
-
-        if (clear) errorMessage.classList.add('hidden')
-        else errorMessage.classList.remove('hidden')
-    }
-}
-
-// Loading view
-function setLoading(isLoading) {
-    const loadingEl = document.getElementById('loading')
-    if (loadingEl) {
-        if (isLoading) loadingEl.classList.remove('hidden')
-        else loadingEl.classList.add('hidden')
-    }
 }
 
 // Format popup content
