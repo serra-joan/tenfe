@@ -1,6 +1,13 @@
 ---
 import '@/styles/global.css'
 import { version } from '../../package.json'
+
+interface Props {
+	title?: string
+	description?: string
+}
+
+const { title, description } = Astro.props as Props
 ---
 
 <!doctype html>
@@ -8,7 +15,8 @@ import { version } from '../../package.json'
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tingues fe - map</title>
+    <title>{title ? title : 'tingues fe'}</title>
+    <meta name="description" content={description ? description : "Web per poder veure les linies R1, RG1 i R11 en temps real des de un mapa i una llista."} />
 
 	<!-- PWA -->
 	<link rel="manifest" href="/manifest.json" />
@@ -16,7 +24,7 @@ import { version } from '../../package.json'
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="apple-mobile-web-app-title" content="Tenfe" />
+	<meta name="apple-mobile-web-app-title" content="tingues fe" />
 
 	<!-- Logos -->
 	<link rel="icon" type="image/png" sizes="54x54" href="images/logos/tinguesfe_54.png" />
@@ -27,10 +35,10 @@ import { version } from '../../package.json'
 	<link rel="icon" type="image/png" sizes="192x192" href="images/logos/tinguesfe_192.png">
 
 	<!-- Share metas -->
-	<meta property="og:title" content="tenfe - map" />
+	<meta property="og:title" content="tingues fe - map" />
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="Tenfe" />
-	<meta property="og:description" content="Mapa en temps real, relativament, d'R1." />
+	<meta property="og:site_name" content="tingues fe" />
+	<meta property="og:description" content="Web per poder veure les linies R1, RG1 i R11 en temps real des de un mapa i una llista." />
 	<meta property="og:url" content="https://tenfe.vercel.app" />
 	<meta property="og:image" content="https://tenfe.vercel.app/images/logos/tinguesfe_192.png" />
 
