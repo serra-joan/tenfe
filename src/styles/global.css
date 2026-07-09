@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'Montserrat Italic';
+    src: url('/fonts/Montserrat-Italic.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 @theme {
+    --font-display: 'Montserrat Italic', sans-serif;
     --color-r1: #3090CF;
     --animate-trainloading: trainloading 2s ease-in infinite;
 
@@ -23,6 +32,11 @@
             transform: rotate(90deg);
         }
     }
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-style: italic;
 }
 
 /* Animation for moving trains */

@@ -1,7 +1,7 @@
 {
-  "name": "Tenfe",
-  "short_name": "Tenfe",
-  "description": "Mapa en temps real d'R1, RG1 i R11",
+  "name": "tingues fe",
+  "short_name": "tingues fe",
+  "description": "Web per poder veure les linies R1, RG1 i R11 en temps real des de un mapa i una llista.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#030712",
