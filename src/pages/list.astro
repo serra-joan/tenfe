@@ -32,14 +32,16 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 				RG1
 			</button>
 		</div>
+		
+		<div id="loading" class="absolute block top-0 left-0 z-10 w-full h-full">
+            <div class="relative w-full h-full flex items-center justify-center">
+                <div class="relative border-b-3 border-r1 w-1/2 z-20 md:w-1/4 md:border-b-5 rounded-xl">
+                    <img src="/icons/train.svg" alt="Train icon" class="w-10 animate-trainloading absolute left-0 bottom-0" />
+                </div>
 
-		<div id="loading" class="hidden">
-			<div class="flex items-center justify-center py-8">
-				<div class="border-b-3 border-r1 w-1/2 md:w-1/4 rounded-xl relative">
-					<img src="/icons/train.svg" alt="Train icon" class="w-10 animate-trainloading absolute left-0 bottom-0" />
-				</div>
-			</div>
-		</div>
+                <div class="absolute top-0 left-0 bg-black opacity-70 w-full h-full rounded-xl"></div>
+            </div>
+        </div>
 
 		<div id="train-list" class="flex-1 min-h-0 overflow-auto">
 			<table class="w-full text-xs md:text-sm">
