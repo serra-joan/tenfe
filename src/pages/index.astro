@@ -4,6 +4,18 @@ import Button from '@/components/Button.astro';
 ---
 
 <Layout title="tingues fe - mapa" description="Vista per veure els trens de les linies R1, RG1 i R11 en temps real en format mapa.">
+	<script is:inline>
+		(() => {
+			const params = new URLSearchParams(window.location.search)
+			const trainId = params.get('trainId')
+			const preferredView = localStorage.getItem('preferredView')
+			if (preferredView === 'list') {
+				const url = trainId ? `/list?trainId=${trainId}` : '/list'
+				window.location.replace(url)
+			}
+		})()
+	</script>
+
 	<div class="mb-2 flex items-center justify-between gap-2">
 		<div class="min-w-0">
 			<h1 class="font-bold text-2xl md:text-4xl">tingues fe</h1>
@@ -46,13 +58,15 @@ import Button from '@/components/Button.astro';
 
     <script src="/js/main.js" defer></script>
 	<script is:inline>
-        // Update the link to the list mode with the trainId parameter if it exists in the URL
 		document.addEventListener('DOMContentLoaded', () => {
 			const params = new URLSearchParams(window.location.search)
 			const trainId = params.get('trainId')
-			if (trainId) {
-				const link = document.getElementById('link-to-list')
-				if (link) link.href = `/list?trainId=${trainId}`
+			const link = document.getElementById('link-to-list')
+			if (link) {
+				link.addEventListener('click', () => {
+					localStorage.setItem('preferredView', 'list')
+				})
+				if (trainId) link.href = `/list?trainId=${trainId}`
 			}
 		})
 	</script>

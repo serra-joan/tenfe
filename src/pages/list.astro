@@ -5,6 +5,18 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 ---
 
 <Layout title="tingues fe - llista" description="Vista per veure els trens de les linies R1, RG1 i R11 en temps real en format llista.">
+	<script is:inline>
+		(() => {
+			const params = new URLSearchParams(window.location.search)
+			const trainId = params.get('trainId')
+			const preferredView = localStorage.getItem('preferredView')
+			if (preferredView === 'map') {
+				const url = trainId ? `/?trainId=${trainId}` : '/'
+				window.location.replace(url)
+			}
+		})()
+	</script>
+
 	<div class="flex-1 flex flex-col min-h-0">
 		<div class="mb-2 flex items-center justify-between gap-2">
 			<div class="min-w-0">
@@ -74,9 +86,12 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 	document.addEventListener('DOMContentLoaded', () => {
 		const params = new URLSearchParams(window.location.search)
 		const trainId = params.get('trainId')
-		if (trainId) {
-			const link = document.getElementById('link-to-map')
-			if (link) link.href = `/?trainId=${trainId}`
+		const link = document.getElementById('link-to-map')
+		if (link) {
+			link.addEventListener('click', () => {
+				localStorage.setItem('preferredView', 'map')
+			})
+			if (trainId) link.href = `/?trainId=${trainId}`
 		}
 	})
 </script>
