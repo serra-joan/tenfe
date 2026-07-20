@@ -273,7 +273,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0224R1",
+      "route_id": "51T0226R1",
       "route_short_name": "R1",
       "route_long_name": "Maçanet-Massanes - Blanes",
       "route_type": "3",
@@ -281,7 +281,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0225R1",
+      "route_id": "51T0227R1",
       "route_short_name": "R1",
       "route_long_name": "Mataró - Maçanet-Massanes",
       "route_type": "3",
@@ -289,7 +289,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0226R1",
+      "route_id": "51T0228R1",
       "route_short_name": "R1",
       "route_long_name": "Calella - Mataró",
       "route_type": "3",
@@ -297,7 +297,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0227R1",
+      "route_id": "51T0229R1",
       "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
