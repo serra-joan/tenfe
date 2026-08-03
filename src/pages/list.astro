@@ -23,9 +23,10 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 				<h1 class="font-bold text-2xl md:text-4xl">tingues fe</h1>
 				<h2 class="text-sm md:text-xl text-gray-400">Act. en <span id="refreshTime">30</span>s</h2>
 			</div>
-			<Button id="link-to-map" href="/" label="Mapa">
-				<img slot="icon" src="/icons/map.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" />
-			</Button>
+			<div class="flex gap-2">
+				<Button href="/estacio" label="Estacions"><img slot="icon" src="/icons/train-white.svg" class="w-4 h-4 md:w-5 md:h-5" alt="" /></Button>
+				<Button id="link-to-map" href="/" label="Mapa"><img slot="icon" src="/icons/map.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" /></Button>
+			</div>
 		</div>
 
 		<p id="txtErrorMessage" class="hidden text-red-400">Alguna cosa ha anat malament. Torna-ho a intentar més tard.</p>
