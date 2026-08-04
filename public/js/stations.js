@@ -120,7 +120,6 @@ function renderTrains() {
             <tbody>${passingTrains.map(({ train, stationIndex, currentIndex, stop }) => {
         const line = getLine(train.id)
         const delay = train.vehicle.delay || 0
-        const state = stationIndex === currentIndex ? 'A l\'estació' : stationIndex === currentIndex + 1 ? 'Propera parada' : 'En ruta'
         const delayMinutes = Math.round(delay / 60)
         const status = train.vehicle.currentStatus === 'INCOMING_AT' ? 'En marxa' : 'Aturat'
         return `
@@ -130,7 +129,7 @@ function renderTrains() {
                 <td class="py-1.5 md:py-2 px-3 md:px-2">${escapeHtml(train.vehicle.stopName || 'N/A')}</td>
                 <td class="py-1.5 md:py-2 px-3 md:px-2">${escapeHtml(train.vehicle.next_stop || '-')}</td>
                 <td class="py-1.5 md:py-2 px-3 md:px-2 text-center">${delay > 0 ? `<span class="inline-flex items-center justify-center gap-0.5 px-1.5 md:px-2 py-0.5 rounded-full bg-red-900/50 text-red-400 text-[10px] md:text-xs font-medium whitespace-nowrap"><img src="/icons/clock.svg" class="w-2.5 h-2.5 md:w-3 md:h-3" alt="" />${delayMinutes}min</span>` : '<span class="text-gray-500">-</span>'}</td>
-                <td class="py-1.5 md:py-2 px-1.5 md:px-2"><span class="text-[10px] md:text-xs ${status === 'En marxa' ? 'text-green-400' : 'text-gray-400'}">${state} · ${status}</span></td>
+                <td class="py-1.5 md:py-2 px-1.5 md:px-2"><span class="text-[10px] md:text-xs ${status === 'En marxa' ? 'text-green-400' : 'text-gray-400'}">${status}</span></td>
             </tr>
         `
     }).join('')}</tbody>
