@@ -10,10 +10,10 @@ import stop_times from '@public/files/output/stop_times_filtered.json' with { ty
 const stationMap = new Map<string, any[]>(
     (stationsJSON.records as any[]).map(r => [String(r[1]), r])
 )
-const tripsMap: Record<DesiredLine, Map<string, any>> = {
-    R1: new Map((trips as any).R1.map((t: any) => [t.trip_id, t])),
-    R11: new Map((trips as any).R11.map((t: any) => [t.trip_id, t])),
-    RG1: new Map((trips as any).RG1.map((t: any) => [t.trip_id, t]))
+const tripsMap: Record<DesiredLine, Map<string, any[]>> = {
+    R1: createTripsMap((trips as any).R1),
+    R11: createTripsMap((trips as any).R11),
+    RG1: createTripsMap((trips as any).RG1)
 }
 const stopTimesMap: Record<DesiredLine, Map<string, Stop[]>> = { R1: new Map(), R11: new Map(), RG1: new Map() }
 for (const line of DESIRED_LINES) {
@@ -54,7 +54,7 @@ export async function GET({ request }: { request: Request }) {
                     e.vehicle.stopName = getStationNameById(e.vehicle.stopId)
 
                     // Add trip info
-                    const trip = tripsMap[line].get(e.vehicle.trip.tripId)
+                    const trip = getTripById(line, e.vehicle.trip.tripId)
                     if (trip) {
                         e.vehicle.trip = {
                             ...e.vehicle.trip,
@@ -64,7 +64,7 @@ export async function GET({ request }: { request: Request }) {
 
                         // Next stop info 
                         // Get all stops from tripId, then get the actual stopId, search in stop_times and with the 'arrival_time' search the next stop
-                        const tripStopTimes = stopTimesMap[line].get(e.vehicle.trip.tripId) ?? []
+                        const tripStopTimes = stopTimesMap[line].get(trip.trip_id) ?? []
                         const currentStopIndex = tripStopTimes.findIndex((stop: Stop) => stop.stop_id == e.vehicle.stopId)
 
                         // Set stops info
@@ -116,7 +116,7 @@ export async function GET({ request }: { request: Request }) {
                         }
 
                         // Add delay info from trip updates
-                        const tripUpdate = tripUpdates.find(update => update.trip_id === e.vehicle.trip.tripId)
+                        const tripUpdate = tripUpdates.find(update => getTripKey(update.trip_id) === getTripKey(e.vehicle.trip.tripId))
                         e.vehicle.delay = tripUpdate ? tripUpdate.delay : 0
 
                     }else {
@@ -162,11 +162,40 @@ function resolveTrainLine(train: TrainElement): DesiredLine | null {
 
     if (tripId) {
         for (const line of DESIRED_LINES) {
-            if (tripsMap[line].has(tripId)) return line
+            if (tripsMap[line].has(getTripKey(tripId))) return line
         }
     }
 
     return extractLineFromTrainId(train.id)
+}
+
+function getTripKey(tripId: string): string {
+    const match = tripId.match(/^\d+[A-Z]+(\d+(?:RG1|R11|R1))$/)
+    return match ? match[1] : tripId
+}
+
+function createTripsMap(trips: any[]): Map<string, any[]> {
+    const map = new Map<string, any[]>()
+
+    for (const trip of trips) {
+        const key = getTripKey(trip.trip_id)
+        const matchingTrips = map.get(key) ?? []
+        matchingTrips.push(trip)
+        map.set(key, matchingTrips)
+    }
+
+    return map
+}
+
+function getTripById(line: DesiredLine, tripId: string): any | undefined {
+    const matchingTrips = tripsMap[line].get(getTripKey(tripId)) ?? []
+    const serviceDay = getCurrentServiceDay()
+    return matchingTrips.find(trip => trip.service_id.endsWith(serviceDay)) ?? matchingTrips[0]
+}
+
+function getCurrentServiceDay(): string {
+    const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Europe/Madrid' }).format(new Date())
+    return { Mon: 'L', Tue: 'M', Wed: 'X', Thu: 'J', Fri: 'V', Sat: 'S', Sun: 'D' }[weekday] ?? ''
 }
 
 
