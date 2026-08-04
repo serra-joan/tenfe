@@ -1,4 +1,5 @@
 const REFRESH_TIME = 30
+const STORAGE_KEY = 'lastStation'
 
 const { restartRefreshCountdown, setErrorMessage, setLoading } = window.CommonFunctions
 const search = document.getElementById('station-search')
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const stationData = await fetch('/files/output/estacions.json').then(response => response.json())
         stations = stationData.records.map(record => ({ code: String(record[1]), name: record[2], municipality: record[7], province: record[8] }))
-        const stationCode = new URLSearchParams(window.location.search).get('estacio')
+        const stationCode = new URLSearchParams(window.location.search).get('estacio') || localStorage.getItem(STORAGE_KEY)
         if (stationCode) selectStation(stations.find(station => station.code === stationCode) || null)
     } catch (error) {
         console.error('Error loading stations:', error)
@@ -68,6 +69,7 @@ async function selectStation(station) {
 
     search.value = station.name
     message.textContent = 'Carregant els trens que passaran per aquesta estació...'
+    localStorage.setItem(STORAGE_KEY, station.code)
     url.searchParams.set('estacio', station.code)
     window.history.replaceState({}, '', url)
     await loadTrains()
