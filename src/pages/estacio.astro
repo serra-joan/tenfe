@@ -33,3 +33,19 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro'
 </Layout>
 
 <script is:inline src="/js/stations.js"></script>
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		const mapLink = document.getElementById('link-to-map')
+		const listLink = document.getElementById('link-to-list')
+		if (mapLink) {
+			mapLink.addEventListener('click', () => {
+				localStorage.setItem('preferredView', 'map')
+			})
+		}
+		if (listLink) {
+			listLink.addEventListener('click', () => {
+				localStorage.setItem('preferredView', 'list')
+			})
+		}
+	})
+</script>

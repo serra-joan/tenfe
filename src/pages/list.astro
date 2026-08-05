@@ -10,8 +10,8 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 			const params = new URLSearchParams(window.location.search)
 			const trainId = params.get('trainId')
 			const preferredView = localStorage.getItem('preferredView')
-			if (preferredView === 'map') {
-				const url = trainId ? `/?trainId=${trainId}` : '/'
+			if (preferredView === 'map' || preferredView === 'estacio') {
+				const url = preferredView === 'estacio' ? '/estacio' : (trainId ? `/?trainId=${trainId}` : '/')
 				window.location.replace(url)
 			}
 		})()
@@ -25,7 +25,7 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 			</div>
 			<div class="flex gap-2">
 				<Button id="link-to-map" href="/" label="Mapa"><img slot="icon" src="/icons/map.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" /></Button>
-				<Button href="/estacio" label="Estacions"><img slot="icon" src="/icons/train-white.svg" class="w-4 h-4 md:w-5 md:h-5" alt="" /></Button>
+				<Button id="link-to-estacio" href="/estacio" label="Estacions"><img slot="icon" src="/icons/train-white.svg" class="w-4 h-4 md:w-5 md:h-5" alt="" /></Button>
 			</div>
 		</div>
 
@@ -87,12 +87,18 @@ import ModalTrainTimeline from '@/components/ModalTrainTimeline.astro';
 	document.addEventListener('DOMContentLoaded', () => {
 		const params = new URLSearchParams(window.location.search)
 		const trainId = params.get('trainId')
-		const link = document.getElementById('link-to-map')
-		if (link) {
-			link.addEventListener('click', () => {
+		const mapLink = document.getElementById('link-to-map')
+		const estacioLink = document.getElementById('link-to-estacio')
+		if (mapLink) {
+			mapLink.addEventListener('click', () => {
 				localStorage.setItem('preferredView', 'map')
 			})
-			if (trainId) link.href = `/?trainId=${trainId}`
+			if (trainId) mapLink.href = `/?trainId=${trainId}`
+		}
+		if (estacioLink) {
+			estacioLink.addEventListener('click', () => {
+				localStorage.setItem('preferredView', 'estacio')
+			})
 		}
 	})
 </script>

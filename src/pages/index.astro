@@ -9,8 +9,8 @@ import Button from '@/components/Button.astro';
 			const params = new URLSearchParams(window.location.search)
 			const trainId = params.get('trainId')
 			const preferredView = localStorage.getItem('preferredView')
-			if (preferredView === 'list') {
-				const url = trainId ? `/list?trainId=${trainId}` : '/list'
+			if (preferredView === 'list' || preferredView === 'estacio') {
+				const url = preferredView === 'estacio' ? '/estacio' : (trainId ? `/list?trainId=${trainId}` : '/list')
 				window.location.replace(url)
 			}
 		})()
@@ -22,7 +22,7 @@ import Button from '@/components/Button.astro';
 			<h2 class="text-sm md:text-xl text-gray-400">Act. en <span id="refreshTime">30</span>s</h2>
 		</div>
 		<div class="flex gap-2">
-			<Button href="/estacio" label="Estacions"><img slot="icon" src="/icons/train-white.svg" class="w-4 h-4 md:w-5 md:h-5" alt="" /></Button>
+			<Button id="link-to-estacio" href="/estacio" label="Estacions"><img slot="icon" src="/icons/train-white.svg" class="w-4 h-4 md:w-5 md:h-5" alt="" /></Button>
 			<Button id="link-to-list" href="/list" label="Llista"><img slot="icon" src="/icons/list.svg" class="w-4 h-4 md:w-5 md:h-5 invert" alt="" /></Button>
 		</div>
 	</div>
@@ -62,12 +62,18 @@ import Button from '@/components/Button.astro';
 		document.addEventListener('DOMContentLoaded', () => {
 			const params = new URLSearchParams(window.location.search)
 			const trainId = params.get('trainId')
-			const link = document.getElementById('link-to-list')
-			if (link) {
-				link.addEventListener('click', () => {
+			const listLink = document.getElementById('link-to-list')
+			const estacioLink = document.getElementById('link-to-estacio')
+			if (listLink) {
+				listLink.addEventListener('click', () => {
 					localStorage.setItem('preferredView', 'list')
 				})
-				if (trainId) link.href = `/list?trainId=${trainId}`
+				if (trainId) listLink.href = `/list?trainId=${trainId}`
+			}
+			if (estacioLink) {
+				estacioLink.addEventListener('click', () => {
+					localStorage.setItem('preferredView', 'estacio')
+				})
 			}
 		})
 	</script>
