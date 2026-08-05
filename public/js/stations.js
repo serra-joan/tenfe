@@ -110,11 +110,12 @@ async function loadTrains() {
 
 function renderTrains() {
     const activeTripIds = new Set(trains.map(train => train.vehicle.trip.tripId))
-    const passingTrains = [...trains.map(train => ({ train, isPlanned: false })), ...plannedTrains.filter(train => !activeTripIds.has(train.vehicle.trip.tripId)).map(train => ({ train, isPlanned: true }))].map(({ train, isPlanned }) => {
+    const passingTrains = [...trains.map(train => {
         const stationIndex = train.stops?.findIndex(stop => String(stop.id) === activeStation.code) ?? -1
-        const currentIndex = isPlanned ? -1 : train.stops?.findIndex(stop => String(stop.id) === String(train.vehicle.stopId)) ?? -1
-        return { train, isPlanned, stationIndex, currentIndex, stop: train.stops?.[stationIndex] }
-    }).filter(item => item.stationIndex !== -1 && (item.currentIndex === -1 || item.stationIndex >= item.currentIndex)).sort((a, b) => timeToMinutes(a.stop.departure_time || a.stop.arrival_time) - timeToMinutes(b.stop.departure_time || b.stop.arrival_time))
+        const currentIndex = train.stops?.findIndex(stop => String(stop.id) === String(train.vehicle.stopId)) ?? -1
+        const stop = train.stops?.[stationIndex]
+        return { train, isPlanned: false, stationIndex, currentIndex, departureTime: stop?.departure_time || stop?.arrival_time || 'N/A' }
+    }), ...plannedTrains.filter(train => !activeTripIds.has(train.vehicle.trip.tripId)).map(train => ({ train, isPlanned: true, stationIndex: 0, currentIndex: -1, departureTime: train.departure_time }))].filter(item => item.stationIndex !== -1 && (item.currentIndex === -1 || item.stationIndex >= item.currentIndex)).sort((a, b) => timeToMinutes(a.departureTime) - timeToMinutes(b.departureTime))
 
     if (!passingTrains.length) {
         message.textContent = 'No hi ha trens actius ni previstos que hagin de passar per aquesta estació.'
@@ -132,23 +133,21 @@ function renderTrains() {
                     <th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Destí</th>
                     <th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Últ. parada</th>
                     <th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Seg. parada</th>
-                    <th class="text-center py-1.5 md:py-2 px-1.5 md:px-2">Retard</th>
                     <th class="text-left py-1.5 md:py-2 px-1.5 md:px-2">Estat</th>
                 </tr>
             </thead>
-            <tbody>${passingTrains.map(({ train, isPlanned, stationIndex, currentIndex, stop }) => {
+            <tbody>${passingTrains.map(({ train, isPlanned, departureTime }) => {
         const line = getLine(train.id)
         const delay = train.vehicle.delay || 0
-        const delayMinutes = Math.round(delay / 60)
+        const expectedDeparture = delay > 0 ? addDelay(departureTime, delay) : ''
         const status = isPlanned ? 'Previst' : train.vehicle.currentStatus === 'INCOMING_AT' ? 'En marxa' : 'Aturat'
         return `
             <tr ${isPlanned ? '' : `data-train-id="${escapeHtml(train.id)}"`} class="${isPlanned ? '' : 'station-train cursor-pointer'} border-b border-gray-800 hover:bg-gray-800/50 transition-colors">
                 <td class="py-1.5 md:py-2 px-4 md:px-2"><div class="flex items-center gap-2 md:gap-1.5"><img src="/images/lines/${line.toLowerCase()}.webp" class="w-4 h-4 md:w-5 md:h-5 rounded" alt="${line}" /><span class="font-bold">${line}</span></div></td>
-                <td class="py-1.5 md:py-2 px-3 md:px-2 whitespace-nowrap">${escapeHtml(stop.departure_time || stop.arrival_time || 'N/A')}</td>
+                <td class="py-1.5 md:py-2 px-3 md:px-2 whitespace-nowrap"><div class="flex flex-col select-none"><span class="${expectedDeparture ? 'line-through' : ''}">${escapeHtml(departureTime)}</span>${expectedDeparture ? `<span class="text-red-400">${escapeHtml(expectedDeparture)}</span>` : ''}</div></td>
                 <td class="py-1.5 md:py-2 px-3 md:px-2">${escapeHtml(train.vehicle.end_station || 'N/A')}</td>
                 <td class="py-1.5 md:py-2 px-3 md:px-2">${escapeHtml(train.vehicle.stopName || 'N/A')}</td>
                 <td class="py-1.5 md:py-2 px-3 md:px-2">${escapeHtml(train.vehicle.next_stop || '-')}</td>
-                <td class="py-1.5 md:py-2 px-3 md:px-2 text-center">${delay > 0 ? `<span class="inline-flex items-center justify-center gap-0.5 px-1.5 md:px-2 py-0.5 rounded-full bg-red-900/50 text-red-400 text-[10px] md:text-xs font-medium whitespace-nowrap"><img src="/icons/clock.svg" class="w-2.5 h-2.5 md:w-3 md:h-3" alt="" />${delayMinutes}min</span>` : '<span class="text-gray-500">-</span>'}</td>
                 <td class="py-1.5 md:py-2 px-1.5 md:px-2"><span class="text-[10px] md:text-xs ${status === 'En marxa' ? 'text-green-400' : status === 'Previst' ? 'text-blue-400' : 'text-gray-400'}">${status}</span></td>
             </tr>
         `

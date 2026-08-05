@@ -4,6 +4,7 @@ import { DESIRED_LINES, type DesiredLine } from '@/scripts/line-utils'
 import stationsJSON from '@public/files/output/estacions.json' with { type: 'json' }
 import tripsJSON from '@public/files/output/trips_filtered.json' with { type: 'json' }
 import stopTimesJSON from '@public/files/output/stop_times_filtered.json' with { type: 'json' }
+import calendarJSON from '@public/files/output/calendar_filtered.json' with { type: 'json' }
 
 type StationRecord = [unknown, string | number, string, string, string]
 type Trip = {
@@ -17,6 +18,7 @@ type ScheduledStop = Stop & {
 type VehiclePositionsResponse = {
     entity?: TrainElement[]
 }
+type CalendarJSON = Record<string, string[]>
 
 const stationMap = new Map<string, StationRecord>(
     (stationsJSON.records as StationRecord[]).map(station => [String(station[1]), station])
@@ -65,11 +67,19 @@ export async function GET({ request }: { request: Request }) {
         const data = await response.json() as VehiclePositionsResponse
         const activeTripIds = new Set((data.entity ?? []).map(train => train.vehicle?.trip?.tripId).filter((tripId): tripId is string => Boolean(tripId)).map(getTripKey))
         const currentMinutes = getCurrentMinutes()
+        const activeServices = getActiveServices(getCurrentDate())
         const plannedTrains = (stationStopsMap.get(stationId) ?? [])
-            .map(stop => createPlannedTrain(stop, activeTripIds, currentMinutes, getCurrentServiceDay()))
-            .filter((train): train is TrainElement => train !== null)
-            .sort((a, b) => getStationTime(a, stationId) - getStationTime(b, stationId))
+            .map(stop => createPlannedTrain(stop, activeTripIds, currentMinutes, activeServices))
+            .filter((train): train is PlannedTrain => train !== null)
+            .sort((a, b) => getTimeInMinutes(a.departure_time) - getTimeInMinutes(b.departure_time))
             .slice(0, 10)
+
+        console.log("Planned trains:", plannedTrains.map(train => ({
+            id: train.id,
+            tripId: train.vehicle.trip.tripId,
+            end_station: train.vehicle.end_station,
+            departure_time: train.departure_time,
+        })))
 
         return new Response(JSON.stringify(plannedTrains), {
             status: 200,
@@ -84,21 +94,18 @@ export async function GET({ request }: { request: Request }) {
     }
 }
 
-function createPlannedTrain(stop: ScheduledStop, activeTripIds: Set<string>, currentMinutes: number, serviceDay: string): TrainElement | null {
+function createPlannedTrain(stop: ScheduledStop, activeTripIds: Set<string>, currentMinutes: number, activeServices: Set<string>): PlannedTrain | null {
     const trip = tripsMap[stop.line].get(stop.trip_id) as TripRaw | undefined
     const tripStops = stopTimesMap[stop.line].get(stop.trip_id) ?? []
     const firstStop = tripStops[0]
     const lastStop = tripStops[tripStops.length - 1]
 
-    if (!trip || !trip.service_id.endsWith(serviceDay) || !firstStop || !lastStop || activeTripIds.has(getTripKey(stop.trip_id)) || getTimeInMinutes(firstStop.departure_time || firstStop.arrival_time) <= currentMinutes) {
+    if (!trip || !activeServices.has(trip.service_id) || !firstStop || !lastStop || activeTripIds.has(getTripKey(stop.trip_id)) || getTimeInMinutes(firstStop.departure_time || firstStop.arrival_time) <= currentMinutes) {
         return null
     }
 
     const nextStop = tripStops[1]
     const position = getStationLatLonById(firstStop.stop_id)
-    const relevantStops = [firstStop, nextStop, stop]
-        .filter((tripStop): tripStop is Stop => Boolean(tripStop))
-        .filter((tripStop, index, stops) => stops.findIndex(item => item.stop_id === tripStop.stop_id && item.stop_sequence === tripStop.stop_sequence) === index)
 
     return {
         id: `planned-${stop.line}-${trip.trip_id}`,
@@ -117,13 +124,7 @@ function createPlannedTrain(stop: ScheduledStop, activeTripIds: Set<string>, cur
             delay: 0,
             currentStatus: 'SCHEDULED'
         },
-        stops: relevantStops.map(tripStop => ({
-            id: tripStop.stop_id,
-            name: getStationNameById(tripStop.stop_id),
-            arrival_time: formatStringTimeToHHMM(tripStop.arrival_time),
-            departure_time: formatStringTimeToHHMM(tripStop.departure_time),
-            latlon: getStationLatLonById(tripStop.stop_id)
-        }))
+        departure_time: formatStringTimeToHHMM(stop.arrival_time || stop.departure_time)
     }
 }
 
@@ -140,11 +141,6 @@ function getCurrentMinutes(): number {
     return hour * 60 + minute
 }
 
-function getStationTime(train: TrainElement, stationId: string): number {
-    const stop = train.stops?.find(trainStop => trainStop.id === stationId)
-    return getTimeInMinutes(stop?.departure_time || stop?.arrival_time || '')
-}
-
 function getTimeInMinutes(time: string): number {
     const [hours, minutes] = time.split(':').map(Number)
     return (hours % 24) * 60 + minutes
@@ -155,9 +151,22 @@ function getTripKey(tripId: string): string {
     return match ? match[1] : tripId
 }
 
-function getCurrentServiceDay(): string {
-    const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Europe/Madrid' }).format(new Date())
-    return { Mon: 'L', Tue: 'M', Wed: 'X', Thu: 'J', Fri: 'V', Sat: 'S', Sun: 'D' }[weekday] ?? ''
+function getCurrentDate(): string {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        timeZone: 'Europe/Madrid'
+    }).formatToParts()
+    const year = parts.find(part => part.type === 'year')?.value ?? ''
+    const month = parts.find(part => part.type === 'month')?.value ?? ''
+    const day = parts.find(part => part.type === 'day')?.value ?? ''
+
+    return `${year}${month}${day}`
+}
+
+function getActiveServices(date: string): Set<string> {
+    return new Set((calendarJSON as CalendarJSON)[date] ?? [])
 }
 
 function getStationNameById(id: string): string {

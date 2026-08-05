@@ -47,3 +47,8 @@ type TrainElement = {
     vehicle: Vehicle
     stops?: { id: string; name: string, arrival_time: string; departure_time: string; latlon: StopLatLon | null }[]
 }
+type PlannedTrain = {
+    id: string
+    vehicle: Vehicle
+    departure_time: string
+}

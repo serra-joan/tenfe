@@ -28,6 +28,7 @@ async function main () {
   await runScript('extract_routes.js')
   await runScript('extract_trips.js')
   await runScript('extract_stop_times.js')
+  await runScript('extract_calendar.js')
   console.log('\nTots els scripts han acabat correctament.')
 }
 
