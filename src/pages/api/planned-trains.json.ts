@@ -85,7 +85,7 @@ export async function GET({ request }: { request: Request }) {
 }
 
 function createPlannedTrain(stop: ScheduledStop, activeTripIds: Set<string>, currentMinutes: number, serviceDay: string): TrainElement | null {
-    const trip = tripsMap[stop.line].get(stop.trip_id)
+    const trip = tripsMap[stop.line].get(stop.trip_id) as TripRaw | undefined
     const tripStops = stopTimesMap[stop.line].get(stop.trip_id) ?? []
     const firstStop = tripStops[0]
     const lastStop = tripStops[tripStops.length - 1]
@@ -105,11 +105,11 @@ function createPlannedTrain(stop: ScheduledStop, activeTripIds: Set<string>, cur
         vehicle: {
             stopId: firstStop.stop_id,
             stopName: getStationNameById(firstStop.stop_id),
-            position: position ?? { latitude: 0, longitude: 0 },
+            position: { latitude: position?.lat ?? 0, longitude: position?.lon ?? 0 },
             trip: {
                 tripId: trip.trip_id,
                 route_id: trip.route_id,
-                wheelchair_accessible: parseInt(trip.wheelchair_accessible)
+                wheelchair_accessible: trip.wheelchair_accessible
             },
             start_station: getStationNameById(firstStop.stop_id),
             end_station: getStationNameById(lastStop.stop_id),

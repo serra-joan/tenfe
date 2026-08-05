@@ -9,15 +9,25 @@ type Stop = {
     trip_id: string
     arrival_time: string
     departure_time: string
+    stop_sequence?: number
 }
 type StopJSON = {
     R1: Stop[]
     R11: Stop[]
     RG1: Stop[]
 }
+type TripRaw = {
+  route_id: string,
+  service_id: string,
+  trip_id: string,
+  wheelchair_accessible: number | string,
+  block_id: string,
+  shape_id: string
+}
 type TripPayload = { 
     tripId: string
     route_id?: string
+    service_id?: string,
     wheelchair_accessible?: number | string
 }
 type Vehicle = {
