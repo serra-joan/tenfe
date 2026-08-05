@@ -74,13 +74,6 @@ export async function GET({ request }: { request: Request }) {
             .sort((a, b) => getTimeInMinutes(a.departure_time) - getTimeInMinutes(b.departure_time))
             .slice(0, 10)
 
-        console.log("Planned trains:", plannedTrains.map(train => ({
-            id: train.id,
-            tripId: train.vehicle.trip.tripId,
-            end_station: train.vehicle.end_station,
-            departure_time: train.departure_time,
-        })))
-
         return new Response(JSON.stringify(plannedTrains), {
             status: 200,
             headers: {
