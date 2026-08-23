@@ -273,23 +273,23 @@
       "route_text_color": "FFFFFF"
     },
     {
+      "route_id": "51T0254R1",
+      "route_short_name": "R1",
+      "route_long_name": "Maçanet-Massanes - Blanes",
+      "route_type": "3",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0255R1",
+      "route_short_name": "R1",
+      "route_long_name": "Maçanet-Massanes - Blanes",
+      "route_type": "3",
+      "route_color": "094188",
+      "route_text_color": "FFFFFF"
+    },
+    {
       "route_id": "51T0256R1",
-      "route_short_name": "R1",
-      "route_long_name": "Maçanet-Massanes - Blanes",
-      "route_type": "3",
-      "route_color": "094188",
-      "route_text_color": "FFFFFF"
-    },
-    {
-      "route_id": "51T0257R1",
-      "route_short_name": "R1",
-      "route_long_name": "Maçanet-Massanes - Blanes",
-      "route_type": "3",
-      "route_color": "094188",
-      "route_text_color": "FFFFFF"
-    },
-    {
-      "route_id": "51T0258R1",
       "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
@@ -297,7 +297,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0259R1",
+      "route_id": "51T0257R1",
       "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
