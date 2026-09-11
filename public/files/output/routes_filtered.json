@@ -289,7 +289,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0255R1",
+      "route_id": "51T0259R1",
       "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
@@ -297,7 +297,7 @@
       "route_text_color": "FFFFFF"
     },
     {
-      "route_id": "51T0256R1",
+      "route_id": "51T0260R1",
       "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
@@ -335,6 +335,30 @@
       "route_short_name": "R11",
       "route_long_name": "Girona - Barcelona-Sant Andreu",
       "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0255R11",
+      "route_short_name": "R11",
+      "route_long_name": "Figueres - PORTBOU",
+      "route_type": "3",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0256R11",
+      "route_short_name": "R11",
+      "route_long_name": "PORTBOU - Barcelona-Sants",
+      "route_type": "3",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0258R11",
+      "route_short_name": "R11",
+      "route_long_name": "PORTBOU - Figueres",
+      "route_type": "3",
       "route_color": "0069AA",
       "route_text_color": "FFFFFF"
     }
