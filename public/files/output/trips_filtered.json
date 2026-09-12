@@ -2,636 +2,6 @@
   "R1": [
     {
       "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25601R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25601",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25603R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25603",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25607R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25607",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25611R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25611",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25613R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25613",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25615R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25615",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25617R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25617",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25619R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25619",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25621R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25621",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25623R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25623",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25625R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25625",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25627R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25627",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25629R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25629",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25631R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25631",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25633R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25633",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25635R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25635",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25639R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25639",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25643R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25643",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25647R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25647",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25649R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25649",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25651R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25651",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25653R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25653",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25655R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25655",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25659R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25659",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25663R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25663",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25667R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25667",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25671R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25671",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25673R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25673",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25675R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25675",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25677R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25677",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25679R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25679",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25683R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25683",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25685R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25685",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25687R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25687",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25689R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25689",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25691R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25691",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25693R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25693",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25729R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25729",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25739R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25739",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25741R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25741",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25743R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25743",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25777R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25777",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25793R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25793",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25795R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25795",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25801R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25801",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25803R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25803",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25805R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25805",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25807R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25807",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25809R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25809",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25813R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25813",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25815R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25815",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25817R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25817",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25819R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25819",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25821R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25821",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25823R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25823",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25825R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25825",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25827R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25827",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25835R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25835",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25837R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25837",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25839R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25839",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25843R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25843",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25845R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25845",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25847R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25847",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25851R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25851",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25853R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25853",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25855R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25855",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25857R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25857",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25859R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25859",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25861R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25861",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25863R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25863",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
       "service_id": "5153S",
       "trip_id": "5153S25601R1",
       "trip_headsign": "",
@@ -15173,636 +14543,6 @@
       "wheelchair_accessible": "1",
       "block_id": "5180V25897",
       "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25600R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25600",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25602R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25602",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25604R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25604",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25606R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25606",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25608R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25608",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25612R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25612",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25616R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25616",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25620R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25620",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25624R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25624",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25628R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25628",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25630R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25630",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25632R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25632",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25634R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25634",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25636R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25636",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25638R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25638",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25640R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25640",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25642R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25642",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25644R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25644",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25646R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25646",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25648R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25648",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25650R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25650",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25652R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25652",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25654R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25654",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25656R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25656",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25660R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25660",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25664R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25664",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25666R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25666",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25668R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25668",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25670R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25670",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25672R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25672",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25674R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25674",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25676R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25676",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25680R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25680",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25684R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25684",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25688R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25688",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25692R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25692",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25694R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25694",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25696R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25696",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25702R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25702",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25714R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25714",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25718R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25718",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25724R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25724",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25726R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25726",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25728R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25728",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25730R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25730",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25732R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25732",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25740R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25740",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25764R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25764",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25768R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25768",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25772R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25772",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25776R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25776",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25806R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25806",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25808R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25808",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25820R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25820",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25822R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25822",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25824R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25824",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25826R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25826",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25828R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25828",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25830R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25830",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25832R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25832",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25842R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25842",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25844R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25844",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25846R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25846",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25848R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25848",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25852R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25852",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25854R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25854",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25856R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25856",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25858R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25858",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25860R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25860",
-      "shape_id": "51_R1_INV"
-    },
-    {
-      "route_id": "51T0002R1",
-      "service_id": "5152V",
-      "trip_id": "5152V25862R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V25862",
-      "shape_id": "51_R1_INV"
     },
     {
       "route_id": "51T0002R1",
@@ -30388,177 +29128,6 @@
   "R11": [
     {
       "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15260R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15260",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15776R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15776",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15780R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15780",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15784R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15784",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15786R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15786",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15850R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15850",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15854R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15854",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15858R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15858",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15860R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15860",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15862R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15862",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15864R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15864",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15866R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15866",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15868R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15868",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15870R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15870",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15874R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15874",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15878R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15878",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15880R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15880",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15884R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15884",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15888R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15888",
-      "shape_id": "51_R11_INV"
-    },
-    {
-      "route_id": "51T0093R11",
       "service_id": "5153S",
       "trip_id": "5153S15772R11",
       "trip_headsign": "",
@@ -37092,157 +35661,175 @@
       "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15700R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15776R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D80102",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15780R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15700",
-      "shape_id": "51_R11"
+      "block_id": "5182D80108",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15702R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15784R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15702",
-      "shape_id": "51_R11"
+      "block_id": "5182D15784",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15726R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15786R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15726",
-      "shape_id": "51_R11"
+      "block_id": "5182D15786",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15730R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15730",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15736R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15736",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15738R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15738",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15800R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15800",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15804R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15804",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15808R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15850R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15808",
-      "shape_id": "51_R11"
+      "block_id": "5182D15850",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15810R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15810",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15814R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15814",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15816R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15854R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15816",
-      "shape_id": "51_R11"
+      "block_id": "5182D15854",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15820R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15858R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15820",
-      "shape_id": "51_R11"
+      "block_id": "5182D15858",
+      "shape_id": "51_R11_INV"
     },
     {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15906R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15906",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15910R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15910",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15914R11",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5152V15914",
-      "shape_id": "51_R11"
-    },
-    {
-      "route_id": "51T0094R11",
-      "service_id": "5152V",
-      "trip_id": "5152V15918R11",
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15860R11",
       "trip_headsign": "",
       "wheelchair_accessible": "2",
-      "block_id": "5152V15918",
-      "shape_id": "51_R11"
+      "block_id": "5182D15860",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15862R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15862",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15864R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15864",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15866R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15866",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15868R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15868",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15870R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15870",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15874R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15874",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15878R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15878",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15880R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15880",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15884R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15884",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15888R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15888",
+      "shape_id": "51_R11_INV"
+    },
+    {
+      "route_id": "51T0093R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15898R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15898",
+      "shape_id": "51_R11_INV"
     },
     {
       "route_id": "51T0094R11",
@@ -42735,6 +41322,177 @@
       "shape_id": "51_R11"
     },
     {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15700R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15700",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15702R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15702",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15726R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15726",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15730R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15730",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15736R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15736",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15738R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15738",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15800R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15800",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15804R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15804",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15808R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15808",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15810R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15810",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15814R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15814",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15816R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15816",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15820R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15820",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15906R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15906",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15910R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15910",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15914R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D15914",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D15918R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D15918",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80102R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80102",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0094R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80108R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80108",
+      "shape_id": "51_R11"
+    },
+    {
       "route_id": "51T0120R11",
       "service_id": "5155L",
       "trip_id": "5155L25470R11",
@@ -43194,12 +41952,120 @@
       "shape_id": "51_R11"
     },
     {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80103R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80103",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80105R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80105",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80107R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80107",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80109R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80109",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80111R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80111",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80113R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80113",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80115R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80115",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80119R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80119",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80221R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80221",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80223R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80223",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0255R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80225R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80225",
+      "shape_id": "51_R11"
+    },
+    {
       "route_id": "51T0256R11",
       "service_id": "5181S",
       "trip_id": "5181S80134R11",
       "trip_headsign": "",
       "wheelchair_accessible": "1",
       "block_id": "5181S80134",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0256R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80134R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "1",
+      "block_id": "5182D80134",
       "shape_id": "51_R11"
     },
     {
@@ -43309,18 +42175,117 @@
       "wheelchair_accessible": "2",
       "block_id": "5181S80132",
       "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80106R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80106",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80110R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80110",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80112R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80112",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80114R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80114",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80116R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80116",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80118R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80118",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80120R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80120",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80124R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80124",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80128R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80128",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80130R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80130",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80132R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80132",
+      "shape_id": "51_R11"
+    },
+    {
+      "route_id": "51T0258R11",
+      "service_id": "5182D",
+      "trip_id": "5182D80226R11",
+      "trip_headsign": "",
+      "wheelchair_accessible": "2",
+      "block_id": "5182D80226",
+      "shape_id": "51_R11"
     }
   ],
   "RG1": [
-    {
-      "route_id": "51T0111RG1",
-      "service_id": "5152V",
-      "trip_id": "5152V15263RG1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "2",
-      "block_id": "5152V15263",
-      "shape_id": "51_RG1"
-    },
     {
       "route_id": "51T0111RG1",
       "service_id": "5155L",
