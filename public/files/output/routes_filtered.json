@@ -355,6 +355,22 @@
       "route_type": "2",
       "route_color": "409EF5",
       "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0181RG1",
+      "route_short_name": "RG1",
+      "route_long_name": "PORTBOU - Maçanet-Massanes",
+      "route_type": "2",
+      "route_color": "409EF5",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "51T0182RG1",
+      "route_short_name": "RG1",
+      "route_long_name": "Maçanet-Massanes - PORTBOU",
+      "route_type": "2",
+      "route_color": "409EF5",
+      "route_text_color": "FFFFFF"
     }
   ]
 }
