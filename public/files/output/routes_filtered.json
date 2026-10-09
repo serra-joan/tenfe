@@ -275,14 +275,6 @@
     {
       "route_id": "51T0228R1",
       "route_short_name": "R1",
-      "route_long_name": "Maçanet-Massanes - Blanes",
-      "route_type": "3",
-      "route_color": "094188",
-      "route_text_color": "FFFFFF"
-    },
-    {
-      "route_id": "51T0229R1",
-      "route_short_name": "R1",
       "route_long_name": "Blanes - Maçanet-Massanes",
       "route_type": "3",
       "route_color": "094188",
