@@ -35,6 +35,14 @@
       "route_text_color": "FFFFFF"
     },
     {
+      "route_id": "51T0119R11",
+      "route_short_name": "R11",
+      "route_long_name": "Barcelona-Sant Andreu - Girona",
+      "route_type": "2",
+      "route_color": "0069AA",
+      "route_text_color": "FFFFFF"
+    },
+    {
       "route_id": "51T0120R11",
       "route_short_name": "R11",
       "route_long_name": "Girona - Barcelona-Sant Andreu",
