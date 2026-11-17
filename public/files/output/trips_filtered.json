@@ -1155,15 +1155,6 @@
     {
       "route_id": "51T0001R1",
       "service_id": "5120M",
-      "trip_id": "5120M25687R1",
-      "trip_headsign": "",
-      "wheelchair_accessible": "1",
-      "block_id": "5120M25687",
-      "shape_id": "51_R1"
-    },
-    {
-      "route_id": "51T0001R1",
-      "service_id": "5120M",
       "trip_id": "5120M25689R1",
       "trip_headsign": "",
       "wheelchair_accessible": "1",
